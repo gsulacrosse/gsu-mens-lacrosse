@@ -1,65 +1,216 @@
-import Image from "next/image";
+import Link from "next/link";
+import site from "@/data/site.json";
+import schedule from "@/data/schedule.json";
+import { NAV } from "@/lib/nav";
+import { ArrowIcon } from "@/components/icons";
+
+type Game = {
+  date: string;
+  opponent: string;
+  home: boolean;
+  location?: string;
+  result?: string;
+};
+
+const fmt = (iso: string) =>
+  new Date(`${iso}T12:00:00`).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+  });
 
 export default function Home() {
+  const games = schedule as Game[];
+
+  // Split on whether a result has been recorded, not on today's date — a
+  // played game without a posted score still belongs under "recent".
+  const upcoming = games.filter((g) => !g.result);
+  const played = games.filter((g) => g.result).slice(-4).reverse();
+  const next = upcoming[0];
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="shell">
+      {/* ================= THE BOARD ================= */}
+      <section
+        className="grid grid-cols-1 lg:grid-cols-[1.35fr_0.65fr]"
+        style={{ borderBottom: "1px solid var(--rule-faint)" }}
+      >
+        {/* Next fixture — the largest thing on the page */}
+        <div
+          className="rise py-8 sm:py-12 lg:py-16 lg:pr-10"
+          style={{ borderRight: "1px solid var(--rule-faint)" }}
+        >
+          <p className="kicker">Next fixture</p>
+
+          {next ? (
+            <>
+              <h1
+                className="display mt-2.5"
+                style={{ fontSize: "var(--step-hero)" }}
+              >
+                {next.opponent}
+              </h1>
+              <div className="mt-4 flex flex-wrap items-baseline gap-x-6 gap-y-2">
+                <span className="numeral" style={{ fontSize: "var(--step-title)" }}>
+                  {fmt(next.date)}
+                </span>
+                <span
+                  className="display"
+                  style={{
+                    fontSize: "0.78rem",
+                    letterSpacing: "0.14em",
+                    color: "var(--gs-gold)",
+                  }}
+                >
+                  {next.home ? "Home" : "Away"}
+                </span>
+                {next.location && (
+                  <span
+                    className="display"
+                    style={{
+                      fontSize: "0.78rem",
+                      letterSpacing: "0.13em",
+                      color: "var(--text-muted)",
+                    }}
+                  >
+                    {next.location}
+                  </span>
+                )}
+              </div>
+            </>
+          ) : (
+            <>
+              <h1
+                className="display mt-2.5"
+                style={{ fontSize: "var(--step-hero)" }}
+              >
+                To be announced
+              </h1>
+              <p className="mt-3" style={{ color: "var(--text-muted)", maxWidth: "46ch" }}>
+                The schedule hasn&rsquo;t been released yet. It&rsquo;ll be
+                posted here and on Instagram as soon as it is.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+                <span
+                  className="display"
+                  style={{
+                    fontSize: "0.78rem",
+                    letterSpacing: "0.13em",
+                    color: "var(--text-muted)",
+                  }}
+                >
+                  {site.homeVenue}
+                </span>
+                <span
+                  className="display"
+                  style={{
+                    fontSize: "0.78rem",
+                    letterSpacing: "0.13em",
+                    color: "var(--text-muted)",
+                  }}
+                >
+                  {site.city}
+                </span>
+              </div>
+            </>
+          )}
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        {/* Recent results */}
+        <aside className="rise py-6 lg:py-12 lg:pl-10">
+          <h2 className="kicker pb-2.5" style={{ borderBottom: "1px solid var(--rule-gold)" }}>
+            Recent results
+          </h2>
+
+          {played.length === 0 ? (
+            <p
+              className="pt-3"
+              style={{ color: "var(--text-muted)", fontSize: "0.9rem" }}
+            >
+              No results posted yet. They&rsquo;ll appear here once games are
+              played.
+            </p>
+          ) : (
+            <ul>
+              {played.map((g) => (
+                <li
+                  key={`${g.date}-${g.opponent}`}
+                  className="flex items-baseline gap-3 py-2.5"
+                  style={{ borderBottom: "1px solid var(--rule-faint)" }}
+                >
+                  <span
+                    className="numeral"
+                    style={{ minWidth: "3.4rem", color: "var(--text-muted)", fontSize: "0.85rem" }}
+                  >
+                    {fmt(g.date)}
+                  </span>
+                  <span className="display flex-1" style={{ fontSize: "0.98rem" }}>
+                    {g.opponent}
+                  </span>
+                  <span className="numeral" style={{ fontSize: "0.92rem" }}>
+                    {g.result}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </aside>
+      </section>
+
+      {/* ================= DESTINATION STRIP ================= */}
+      <nav
+        aria-label="Sections"
+        className="grid grid-cols-2 lg:grid-cols-4"
+        style={{ borderBottom: "1px solid var(--rule-faint)" }}
+      >
+        {NAV.map((item, i) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className="rise group flex cursor-pointer flex-col gap-1.5 px-4 py-7 transition-colors duration-200 sm:py-9"
+            style={{
+              animationDelay: `${i * 45}ms`,
+              borderRight: "1px solid var(--rule-faint)",
+              borderBottom: "1px solid var(--rule-faint)",
+            }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+            <span className="numeral" style={{ fontSize: "0.72rem", color: "var(--gs-gold)" }}>
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <span
+              className="display transition-colors duration-200 group-hover:text-[var(--gs-gold)]"
+              style={{ fontSize: "clamp(1.25rem, 3.6vw, 1.85rem)" }}
+            >
+              {item.label}
+            </span>
+            <span style={{ color: "var(--text-muted)", fontSize: "0.78rem" }}>
+              {item.blurb}
+            </span>
+          </Link>
+        ))}
+      </nav>
+
+      {/* ================= JOIN ================= */}
+      <section className="rise flex flex-wrap items-center gap-5 py-8 sm:py-11">
+        <p style={{ color: "var(--text-muted)", flex: 1, minWidth: "16rem", maxWidth: "46ch" }}>
+          Open to all Georgia Southern students. Experience helps, but we take
+          beginners.
+        </p>
+        <a
+          href={site.links.interestForm}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="display inline-flex cursor-pointer items-center gap-2.5 px-7 transition-colors duration-200 hover:bg-[var(--gs-gold)]"
+          style={{
+            minHeight: 48,
+            background: "var(--gs-white)",
+            color: "var(--text-on-light)",
+            letterSpacing: "0.14em",
+          }}
+        >
+          Interest form
+          <ArrowIcon />
+        </a>
+      </section>
     </div>
   );
 }

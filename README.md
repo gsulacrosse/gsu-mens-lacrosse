@@ -1,36 +1,143 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Georgia Southern Men's Lacrosse — Website
 
-## Getting Started
+Site for the GS Men's Lacrosse Club (MCLA DII, SELC North, est. 1993).
 
-First, run the development server:
+**You do not need to know how to code to update this site.** Everything the
+club changes week to week lives in five text files. Instructions below.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## Updating the site
+
+All content lives in `src/data/`. Edit these on GitHub — click the file, click
+the pencil icon, make your change, click "Commit changes" at the bottom. The
+site rebuilds itself within about a minute.
+
+The files use a format called JSON. Two rules cover almost every mistake:
+
+- Every item needs a comma after it **except the last one**.
+- Text goes in `"double quotes"`. Numbers don't.
+
+If you break something, GitHub keeps every past version — nothing is ever lost.
+
+### `schedule.json` — games and results
+
+The home page automatically shows the **first game with no `result`** as the
+next fixture. You don't set that separately.
+
+```json
+[
+  {
+    "date": "2026-09-12",
+    "opponent": "Kennesaw State",
+    "home": true,
+    "location": "Georgia Southern RAC",
+    "result": "W 12-8"
+  }
+]
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- `date` — always `YYYY-MM-DD`.
+- `home` — `true` for home games, `false` for away.
+- `location` — optional.
+- `result` — **leave this out entirely until the game is played.** Once you add
+  it, the game moves from "next fixture" to "recent results."
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Empty schedule? Leave it as `[]` and the site says "To be announced."
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### `roster.json` — players
 
-## Learn More
+```json
+[
+  { "number": 24, "name": "First Last", "position": "Attack", "year": "Junior" }
+]
+```
 
-To learn more about Next.js, take a look at the following resources:
+Every field except `name` is optional.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### `board.json` — club officers
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```json
+[{ "role": "President", "name": "First Last" }]
+```
 
-## Deploy on Vercel
+### `products.json` — merch
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```json
+[
+  {
+    "name": "Team Hoodie",
+    "price": "$55",
+    "checkoutUrl": "https://your-vendor.com/product/hoodie",
+    "note": "Navy, unisex sizing"
+  }
+]
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`checkoutUrl` can point anywhere — the vendor's own store, Shopify, a Stripe
+link. The site doesn't care which vendor you use, so switching vendors later
+means changing these links and nothing else.
+
+### `site.json` — contact info and links
+
+Email, social links, interest form, GoFundMe. Change a URL here and it updates
+everywhere on the site.
+
+Leave a social link as `""` (empty) to hide it rather than link somewhere dead.
+
+---
+
+## Swapping in the real logo and team photo
+
+The site ships with obvious placeholders. To replace them:
+
+1. Put the real files in `public/brand/`.
+2. If your photo is a `.jpg`, open `src/data/site.json` and change
+   `"fieldPhoto": "/brand/team-photo.svg"` to `"/brand/team-photo.jpg"`.
+
+That's it. See `ASSETS-NEEDED.md` for exactly what to ask the team for.
+
+---
+
+## For developers
+
+```bash
+npm install
+npm run dev      # http://localhost:3000
+npm run build
+```
+
+**Stack:** Next.js 16 (App Router), Tailwind v4, TypeScript. All five routes
+prerender as static HTML.
+
+### Design system
+
+The site follows **Direction 03 — Fixture Board**, chosen from three explored
+directions. Source mockups are in `design/`, mirrored to the team's Claude
+Design project under `gsu-lacrosse/`.
+
+The rules that make it that direction rather than a generic dark site:
+
+- **Hairlines, not cards.** Content is separated by 1px rules like a printed
+  results table. No floating panels with background fills anywhere. To group
+  things, use a rule.
+- **Gold is a highlight, never a fill.** Thin accents and hairlines only.
+- **Hard corners.** `--radius` is `0px` and should stay that way.
+- **Condensed type does the work.** Barlow Condensed for headings and all
+  numerals (tabular, so columns align), Barlow for body.
+- **Motion is one short upward translate.** That's the entire vocabulary.
+
+All colors, type sizes, and spacing live in `src/app/tokens.css`. Restyling the
+whole site means editing that one file.
+
+### Two things not to break
+
+**1. The fixed background.** `background-attachment: fixed` is broken on iOS
+Safari — it silently falls back to scrolling, with no error. Since most
+visitors arrive from the Instagram bio on an iPhone, the background is built as
+a separate `position: fixed` element in `globals.css` (`.field-layer`). Don't
+"simplify" it back into a background-attachment rule.
+
+**2. Never invent data.** No made-up games, players, sponsors, or prices, even
+as filler. Every list has an honest empty state. A plausible-looking invention
+is worse than a blank, because someone will believe it.

@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# UI/UX Pro Max skill bytecode
+__pycache__/
+*.pyc

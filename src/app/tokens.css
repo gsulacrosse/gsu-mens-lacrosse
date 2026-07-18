@@ -1,0 +1,78 @@
+/* ==========================================================================
+   GEORGIA SOUTHERN MEN'S LACROSSE — DESIGN TOKENS
+   --------------------------------------------------------------------------
+   This is the single file a designer edits to restyle the whole site.
+   Every color, size, and spacing value used anywhere lives here.
+
+   >>> TODO: CONFIRM BRAND COLORS WITH THE TEAM <<<
+   The navy and gold below are PLACEHOLDERS. They have NOT been verified
+   against Georgia Southern's official brand guide or the club's logo files.
+   Do not treat them as correct. Ask the team (or whoever holds the vector
+   crest) for the exact hex values, then replace the three values marked
+   UNCONFIRMED below. Nothing else needs to change.
+   ========================================================================== */
+
+:root {
+  /* --- Brand palette ---------------------------------------------------- */
+  --gs-navy: #0a1f44; /* UNCONFIRMED placeholder */
+  --gs-navy-deep: #05122a; /* UNCONFIRMED placeholder */
+  --gs-gold: #b5a16b; /* UNCONFIRMED placeholder */
+  --gs-white: #ffffff;
+
+  /* Panel fill. Near-opaque on purpose: a team photo is visually busy, so
+     text never sits directly on it. The photo reads in the GAPS between
+     panels, not behind the words. Do not lower this below 0.90 without
+     re-checking contrast. */
+  --panel-bg: rgba(10, 31, 68, 0.94);
+  --panel-bg-solid: #0a1f44;
+
+  /* --- Text ------------------------------------------------------------- */
+  --text-primary: #ffffff;
+  --text-muted: #b9c4d6; /* 4.5:1+ on --panel-bg */
+  --text-on-light: #05122a;
+
+  /* --- Lines & edges ---------------------------------------------------- */
+  /* Gold is a HIGHLIGHT, never a fill. Hairlines and accents only. */
+  --rule-gold: rgba(181, 161, 107, 0.85);
+  --rule-faint: rgba(255, 255, 255, 0.14);
+
+  /* Hard edges throughout — this is a printed program, not a SaaS card. */
+  --radius: 0px;
+
+  /* --- Type ------------------------------------------------------------- */
+  --font-display: var(--font-barlow-condensed), "Arial Narrow", sans-serif;
+  --font-body: var(--font-barlow), system-ui, sans-serif;
+
+  --step-hero: clamp(2.75rem, 11vw, 6rem);
+  --step-title: clamp(1.75rem, 6vw, 3rem);
+  --step-tile: clamp(1.5rem, 5.5vw, 2.25rem);
+  --step-body: 1rem; /* never below 16px on mobile */
+  --step-small: 0.8125rem;
+
+  /* --- Spacing ---------------------------------------------------------- */
+  --gap-panel: 0.75rem; /* the gap that lets the photo show through */
+  --pad-panel: clamp(1.5rem, 5vw, 3rem);
+  --shell-max: 68rem;
+
+  /* --- Motion ----------------------------------------------------------- */
+  /* Minimal and physical. Short translate on entry, crest shrink on scroll.
+     Nothing else. */
+  --dur: 220ms;
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+
+  /* --- Layering --------------------------------------------------------- */
+  --z-bg: -1;
+  --z-content: 10;
+  --z-header: 30;
+}
+
+/* Map tokens into Tailwind v4's theme so utilities can reach them. */
+@theme inline {
+  --color-navy: var(--gs-navy);
+  --color-navy-deep: var(--gs-navy-deep);
+  --color-gold: var(--gs-gold);
+  --color-panel: var(--panel-bg-solid);
+  --color-muted: var(--text-muted);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+}

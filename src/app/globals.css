@@ -1,26 +1,162 @@
 @import "tailwindcss";
+@import "./tokens.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ==========================================================================
+   BASE
+   ========================================================================== */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background-color: var(--gs-navy-deep);
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Transparent so the fixed field layer behind it shows through. */
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--step-body);
+  line-height: 1.6;
+  overflow-x: hidden; /* guard against any horizontal scroll on mobile */
+}
+
+/* ==========================================================================
+   THE FIELD LAYER
+
+   This is the single most important technique in this build.
+
+   `background-attachment: fixed` DOES NOT WORK on iOS Safari — it silently
+   degrades to `scroll`. Since nearly all traffic here is iPhone users tapping
+   through from the Instagram bio, using it would mean the fixed-photo effect
+   simply doesn't happen for most visitors, with no error to tell you.
+
+   Instead: a separate `position: fixed` element behind the content. This is
+   well supported everywhere, including iOS. Content scrolls above it.
+
+   DO NOT "simplify" this back into a background-attachment rule.
+   ========================================================================== */
+
+.field-layer {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-bg);
+  background-image: var(--field-image);
+  background-size: cover;
+  background-position: center 28%;
+  background-repeat: no-repeat;
+  background-color: var(--gs-navy-deep); /* shown before image loads */
+}
+
+/*
+  Darkening wash.
+
+  This is heavier than you'd expect because the Fixture Board layout has no
+  opaque panels — type sits directly over the photo, separated only by
+  hairlines. The photo has to stay subordinate or the dense tabular text
+  becomes unreadable. If the real team photo turns out darker than the
+  placeholder, this can be eased back; check contrast before you do.
+*/
+.field-layer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(5, 18, 42, 0.82),
+    rgba(5, 18, 42, 0.94)
+  );
+}
+
+/* ==========================================================================
+   STRUCTURE — hairlines, not cards
+
+   The Fixture Board direction separates content with 1px rules the way a
+   printed results table does. There are no floating cards anywhere. If you
+   find yourself adding a background fill to group things, use a rule instead.
+   ========================================================================== */
+
+.shell {
+  max-width: var(--shell-max);
+  margin-inline: auto;
+  padding-inline: 20px;
+  width: 100%;
+}
+
+.hair {
+  border-color: var(--rule-faint);
+  border-style: solid;
+  border-width: 0;
+}
+
+/* Thin gold hairline. A highlight, never a fill. */
+.rule-gold {
+  border-top: 1px solid var(--rule-gold);
+}
+
+/* Small uppercase label above a heading — "NEXT FIXTURE", "RECENT RESULTS" */
+.kicker {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: var(--gs-gold);
+}
+
+/* ==========================================================================
+   TYPE
+   ========================================================================== */
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 0.95;
+}
+
+/* Numbers — jersey numbers, scores, dates — set tabular so columns align. */
+.numeral {
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   MOTION — short upward translate on entry. That's the whole vocabulary.
+   ========================================================================== */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise var(--dur) var(--ease) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   FOCUS — visible for keyboard nav
+   ========================================================================== */
+
+:focus-visible {
+  outline: 2px solid var(--gs-gold);
+  outline-offset: 3px;
 }

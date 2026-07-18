@@ -1,0 +1,109 @@
+<!-- @dsCard group="Home directions" -->
+<!--
+  DIRECTION 02 — FULL BLEED
+  No panels at all. The photo IS the page. Type sits directly on it with a
+  scrim only behind the words. Destinations are one vertical list of large
+  type, left-aligned and numbered — nothing resembling a card grid.
+  This is the direction that depends most on a good team photo.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>02 — Full Bleed</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#0a1f44;--deep:#05122a;--gold:#b5a16b}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{background:var(--deep)}
+  body{color:#fff;font-family:Barlow,system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+  .disp{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;font-weight:700;line-height:.88}
+
+  /* fixed field layer — position:fixed, NOT background-attachment (iOS) */
+  .field{position:fixed;inset:0;z-index:-1;
+    background:radial-gradient(120% 90% at 50% 15%,#12305e 0%,#0a1f44 45%,#05122a 100%)}
+  .field::after{content:'';position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(5,18,42,.30) 0%,rgba(5,18,42,.55) 55%,rgba(5,18,42,.92) 100%)}
+  .fieldhint{position:absolute;inset:0;display:grid;place-items:center;color:rgba(255,255,255,.16);
+    font-family:'Barlow Condensed',sans-serif;letter-spacing:.4em;font-size:.8rem;text-transform:uppercase}
+
+  /* thin top strip, gold hairline — minimal chrome */
+  .bar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:14px;
+    padding:12px 22px;border-bottom:1px solid rgba(181,161,107,.5);
+    backdrop-filter:blur(6px);background:rgba(5,18,42,.55)}
+  .bar svg{width:34px;height:34px;flex:none}
+  .bar .nm{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;font-weight:700;
+    letter-spacing:.16em;font-size:.76rem}
+  .bar .sp{flex:1}
+  .bar a{color:#fff;text-decoration:none;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;
+    letter-spacing:.14em;font-size:.72rem;font-weight:600;padding:8px 9px;transition:color .2s;cursor:pointer}
+  .bar a:hover{color:var(--gold)}
+  @media(max-width:640px){ .bar .links{display:none} }
+
+  .stage{max-width:1080px;margin:0 auto;padding:clamp(60px,16vh,150px) 22px 0}
+  h1{font-size:clamp(3rem,13vw,7.5rem);letter-spacing:-.005em;
+     text-shadow:0 2px 40px rgba(5,18,42,.75)}
+  h1 em{font-style:normal;display:block;color:var(--gold)}
+  .meta{margin-top:20px;padding-top:14px;border-top:1px solid rgba(181,161,107,.75);
+    font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.2em;
+    font-size:.74rem;font-weight:600;color:#cfd8e6;max-width:640px}
+
+  /* destinations: a list, deliberately not a grid of cards */
+  .dests{max-width:1080px;margin:clamp(48px,10vh,110px) auto 0;padding:0 22px}
+  .dests a{display:flex;align-items:center;gap:18px;padding:clamp(16px,3.4vw,26px) 0;
+    border-top:1px solid rgba(255,255,255,.16);text-decoration:none;color:#fff;
+    transition:padding-left .22s cubic-bezier(.2,0,0,1),color .22s;cursor:pointer}
+  .dests a:last-child{border-bottom:1px solid rgba(255,255,255,.16)}
+  .dests a:hover{padding-left:14px;color:var(--gold)}
+  .dests .n{font-family:'Barlow Condensed',sans-serif;font-variant-numeric:tabular-nums;
+    color:var(--gold);font-size:.8rem;font-weight:700;min-width:30px}
+  .dests .l{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;font-weight:700;
+    font-size:clamp(1.8rem,6.5vw,3.4rem);line-height:1;flex:1}
+  .dests .b{display:none;color:#aab7cc;font-size:.86rem}
+  @media(min-width:700px){ .dests .b{display:block;min-width:170px;text-align:right} }
+  .dests .arw{color:var(--gold);font-size:1.3rem}
+
+  .foot{max-width:1080px;margin:0 auto;padding:clamp(44px,9vh,90px) 22px 60px}
+  .cta{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--navy);
+    padding:15px 28px;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;
+    letter-spacing:.14em;font-weight:700;text-decoration:none;transition:background .2s;cursor:pointer}
+  .cta:hover{background:var(--gold)}
+  .foot p{color:#aab7cc;max-width:44ch;margin-bottom:20px}
+</style>
+</head>
+<body>
+  <div class="field"><div class="fieldhint">team photo — full bleed</div></div>
+
+  <div class="bar">
+    <svg viewBox="0 0 200 200" aria-label="Crest">
+      <circle cx="100" cy="100" r="94" fill="#0a1f44" stroke="#b5a16b" stroke-width="5"/>
+      <g stroke="#fff" stroke-width="9" stroke-linecap="round">
+        <line x1="74" y1="134" x2="116" y2="70"/><line x1="126" y1="134" x2="84" y2="70"/>
+      </g>
+    </svg>
+    <span class="nm">GS Men&rsquo;s Lacrosse</span>
+    <span class="sp"></span>
+    <span class="links">
+      <a href="#">Schedule</a><a href="#">Roster</a><a href="#">Store</a><a href="#">Donate</a>
+    </span>
+  </div>
+
+  <div class="stage">
+    <h1 class="disp">Georgia Southern<em>Men&rsquo;s Lacrosse</em></h1>
+    <p class="meta">Est. 1993 &nbsp;·&nbsp; MCLA Division II &nbsp;·&nbsp; SELC North &nbsp;·&nbsp; Georgia Southern RAC</p>
+  </div>
+
+  <nav class="dests">
+    <a href="#"><span class="n">01</span><span class="l">Schedule</span><span class="b">Games &amp; results</span><span class="arw">&rarr;</span></a>
+    <a href="#"><span class="n">02</span><span class="l">Roster</span><span class="b">Players &amp; board</span><span class="arw">&rarr;</span></a>
+    <a href="#"><span class="n">03</span><span class="l">Store</span><span class="b">Team merch</span><span class="arw">&rarr;</span></a>
+    <a href="#"><span class="n">04</span><span class="l">Donate</span><span class="b">Support the season</span><span class="arw">&rarr;</span></a>
+  </nav>
+
+  <div class="foot">
+    <p>Open to all Georgia Southern students. Experience helps, but we take beginners.</p>
+    <a class="cta" href="#">Interest form &rarr;</a>
+  </div>
+</body>
+</html>

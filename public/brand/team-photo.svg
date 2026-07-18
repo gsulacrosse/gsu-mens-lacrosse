@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  PLACEHOLDER FIELD BACKGROUND — NOT THE REAL TEAM PHOTO.
+
+  This stands in for the full-res team photo that goes behind every page.
+  Replace by dropping the real photo at public/brand/team-photo.jpg and
+  changing assets.fieldPhoto in src/data/site.json to "/brand/team-photo.jpg".
+
+  Photo guidance for whoever supplies it:
+    - Landscape, at least 2000px wide, ideally 2400px+.
+    - The team should sit in the middle band of the frame — the top ~25% sits
+      under the crest header and the bottom is covered by content panels.
+    - It gets a dark navy wash over it, so a bright, well-lit shot survives
+      better than a moody one.
+
+  See ASSETS-NEEDED.md.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d2752"/>
+      <stop offset="55%" stop-color="#0a1f44"/>
+      <stop offset="100%" stop-color="#05122a"/>
+    </linearGradient>
+    <pattern id="turf" width="160" height="1000" patternUnits="userSpaceOnUse">
+      <rect width="160" height="1000" fill="none"/>
+      <rect x="0" y="0" width="80" height="1000" fill="#ffffff" opacity="0.016"/>
+    </pattern>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#sky)"/>
+  <rect width="1600" height="1000" fill="url(#turf)"/>
+
+  <!-- Suggestion of field markings, very low contrast -->
+  <g stroke="#ffffff" opacity="0.07" fill="none" stroke-width="2">
+    <line x1="0" y1="700" x2="1600" y2="700"/>
+    <line x1="0" y1="820" x2="1600" y2="820"/>
+    <circle cx="800" cy="700" r="120"/>
+    <line x1="800" y1="580" x2="800" y2="1000"/>
+  </g>
+
+  <text x="800" y="500" text-anchor="middle"
+        font-family="Arial Narrow, Arial, sans-serif" font-size="30"
+        fill="#ffffff" opacity="0.30" letter-spacing="7">TEAM PHOTO PLACEHOLDER</text>
+</svg>

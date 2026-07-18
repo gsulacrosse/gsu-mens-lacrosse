@@ -1,0 +1,132 @@
+<!-- @dsCard group="Home directions" -->
+<!--
+  DIRECTION 03 — FIXTURE BOARD
+  Modelled on stadium fixture boards and MCLA results tables rather than
+  on websites. Dense, tabular, high information density. The next fixture
+  is the largest thing on the page. Gold hairlines, hard corners, no cards.
+  Strongest when there is real schedule data to show.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>03 — Fixture Board</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#0a1f44;--deep:#05122a;--gold:#b5a16b;--line:rgba(255,255,255,.13)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--deep);color:#fff;font-family:Barlow,system-ui,sans-serif;
+       -webkit-font-smoothing:antialiased}
+  .disp{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;font-weight:700;line-height:.9}
+  .num{font-family:'Barlow Condensed',sans-serif;font-variant-numeric:tabular-nums;font-weight:600}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px 70px}
+
+  /* Header row reads like a scoreboard header */
+  .top{display:flex;align-items:center;gap:16px;padding:16px 0;border-bottom:2px solid var(--gold)}
+  .top svg{width:52px;height:52px;flex:none}
+  .top h1{font-size:clamp(1.1rem,3.2vw,1.7rem);letter-spacing:.02em}
+  .top .sub{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;
+    letter-spacing:.2em;font-size:.65rem;color:var(--gold);font-weight:700;margin-top:3px}
+  .top .sp{flex:1}
+  .top nav{display:flex;gap:2px}
+  .top nav a{color:#fff;text-decoration:none;font-family:'Barlow Condensed',sans-serif;
+    text-transform:uppercase;letter-spacing:.13em;font-size:.72rem;font-weight:600;
+    padding:12px 11px;border-bottom:2px solid transparent;transition:.2s;cursor:pointer}
+  .top nav a:hover{color:var(--gold);border-bottom-color:var(--gold)}
+  @media(max-width:700px){ .top nav{display:none} }
+
+  /* The board: next fixture dominates */
+  .board{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--line)}
+  @media(min-width:900px){ .board{grid-template-columns:1.35fr .65fr} }
+  .next{padding:clamp(28px,6vw,56px) 0;border-right:1px solid var(--line)}
+  .kick{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.28em;
+    font-size:.66rem;color:var(--gold);font-weight:700}
+  .next h2{font-size:clamp(2.4rem,8.5vw,4.6rem);margin-top:10px}
+  .next .when{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px 22px;align-items:baseline}
+  .next .when span{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;
+    letter-spacing:.13em;font-size:.78rem;color:#b9c4d6}
+  .empty{color:#8fa0bb;margin-top:12px;font-size:.95rem}
+
+  .side{padding:clamp(22px,4vw,38px) 0 clamp(22px,4vw,38px) clamp(0px,3vw,34px)}
+  .side h3{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.2em;
+    font-size:.66rem;color:var(--gold);font-weight:700;padding-bottom:9px;border-bottom:1px solid var(--gold)}
+  .row{display:flex;gap:12px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--line);
+    font-size:.9rem}
+  .row .d{color:#8fa0bb;min-width:54px}
+  .row .o{flex:1;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;font-weight:700}
+
+  /* destination strip — four columns, hairline dividers, no cards */
+  .strip{display:grid;grid-template-columns:repeat(2,1fr);border-bottom:1px solid var(--line)}
+  @media(min-width:820px){ .strip{grid-template-columns:repeat(4,1fr)} }
+  .strip a{display:flex;flex-direction:column;gap:6px;padding:clamp(22px,4vw,34px) 16px;
+    text-decoration:none;color:#fff;border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+    transition:background .2s;cursor:pointer}
+  .strip a:hover{background:rgba(181,161,107,.12)}
+  .strip .n{font-family:'Barlow Condensed',sans-serif;font-variant-numeric:tabular-nums;
+    color:var(--gold);font-size:.72rem;font-weight:700}
+  .strip .l{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;font-weight:700;
+    font-size:clamp(1.25rem,3.6vw,1.85rem);line-height:1}
+  .strip .b{color:#8fa0bb;font-size:.78rem}
+
+  .join{display:flex;flex-wrap:wrap;align-items:center;gap:18px;padding:clamp(26px,5vw,44px) 0}
+  .join p{flex:1;min-width:260px;color:#b9c4d6;max-width:46ch}
+  .cta{display:inline-flex;align-items:center;gap:9px;background:#fff;color:var(--navy);padding:14px 26px;
+    font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.14em;
+    font-weight:700;text-decoration:none;transition:background .2s;cursor:pointer}
+  .cta:hover{background:var(--gold)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <svg viewBox="0 0 200 200" aria-label="Crest">
+      <circle cx="100" cy="100" r="94" fill="#0a1f44" stroke="#b5a16b" stroke-width="5"/>
+      <circle cx="100" cy="100" r="78" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="2"/>
+      <g stroke="#fff" stroke-width="8" stroke-linecap="round">
+        <line x1="74" y1="134" x2="116" y2="70"/><line x1="126" y1="134" x2="84" y2="70"/>
+      </g>
+    </svg>
+    <div>
+      <h1 class="disp">Georgia Southern Men&rsquo;s Lacrosse</h1>
+      <div class="sub">Est. 1993 · MCLA DII · SELC North</div>
+    </div>
+    <span class="sp"></span>
+    <nav>
+      <a href="#">Schedule</a><a href="#">Roster</a><a href="#">Store</a><a href="#">Donate</a>
+    </nav>
+  </header>
+
+  <section class="board">
+    <div class="next">
+      <div class="kick">Next fixture</div>
+      <h2 class="disp">To be announced</h2>
+      <p class="empty">The 2025&ndash;26 schedule hasn&rsquo;t been released yet. It&rsquo;ll be posted here and on Instagram.</p>
+      <div class="when">
+        <span>Georgia Southern RAC</span>
+        <span>Statesboro, GA</span>
+      </div>
+    </div>
+
+    <aside class="side">
+      <h3>Recent results</h3>
+      <div class="row"><span class="d">&mdash;</span><span class="o">No results posted</span></div>
+      <p class="empty" style="font-size:.85rem">Results appear here once games are played.</p>
+    </aside>
+  </section>
+
+  <nav class="strip">
+    <a href="#"><span class="n">01</span><span class="l">Schedule</span><span class="b">Games &amp; results</span></a>
+    <a href="#"><span class="n">02</span><span class="l">Roster</span><span class="b">Players &amp; board</span></a>
+    <a href="#"><span class="n">03</span><span class="l">Store</span><span class="b">Team merch</span></a>
+    <a href="#"><span class="n">04</span><span class="l">Donate</span><span class="b">Support the season</span></a>
+  </nav>
+
+  <section class="join">
+    <p>Open to all Georgia Southern students. Experience helps, but we take beginners.</p>
+    <a class="cta" href="#">Interest form &rarr;</a>
+  </section>
+</div>
+</body>
+</html>
