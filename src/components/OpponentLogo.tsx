@@ -1,13 +1,12 @@
 import Image from "next/image";
 
 /**
- * Opponent / conference logo shown on a white chip.
+ * Opponent / conference logo, transparent background (no chip).
  *
- * The chip matters: many opponent logos are dark (Wake Forest black, UGA red,
- * the navy schools) and would vanish on our navy background. A white tile —
- * the way every sports schedule renders opponent marks — keeps them all
- * visible and uniform. Hard corners to match the site; the logo is contained,
- * never cropped or stretched.
+ * Note: dark logos (Wake Forest, The Citadel, Kennesaw State, North Florida,
+ * SCAD, the navy schools) have low contrast on the navy background this way.
+ * If they need lifting, add a subtle frosted backdrop here rather than going
+ * back to a solid white box. The logo is contained, never cropped/stretched.
  */
 export default function OpponentLogo({
   src,
@@ -19,17 +18,10 @@ export default function OpponentLogo({
   size?: number;
 }) {
   if (!src) return null;
-  const pad = Math.round(size * 0.14);
   return (
     <span
       className="inline-flex flex-none items-center justify-center"
-      style={{
-        width: size,
-        height: size,
-        background: "#ffffff",
-        border: "1px solid var(--rule-faint)",
-        padding: pad,
-      }}
+      style={{ width: size, height: size }}
     >
       <Image
         src={src}
