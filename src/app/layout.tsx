@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Barlow, Barlow_Condensed } from "next/font/google";
 import type { CSSProperties } from "react";
 import site from "@/data/site.json";
+import { SITE_URL } from "@/lib/site-url";
 import CrestHeader from "@/components/CrestHeader";
 import SiteFooter from "@/components/SiteFooter";
 import "./globals.css";
@@ -18,16 +19,36 @@ const barlow = Barlow({
   weight: ["400", "500", "600"],
 });
 
+const description = `${site.league} club lacrosse at Georgia Southern University. ${site.conference}, established ${site.established}. Home games at the ${site.homeVenue} in ${site.city}.`;
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: site.teamName,
     template: `%s — ${site.shortName}`,
   },
-  description: `${site.league} club lacrosse at Georgia Southern University. ${site.conference}, established ${site.established}. Home games at the ${site.homeVenue} in ${site.city}.`,
+  description,
+  keywords: [
+    "Georgia Southern lacrosse",
+    "GSU lacrosse",
+    "GS Eagles lacrosse",
+    "MCLA",
+    "SELC",
+    "club lacrosse",
+    "Statesboro",
+  ],
+  alternates: { canonical: "/" },
   openGraph: {
     title: site.teamName,
     description: `${site.league} · ${site.conference} · Est. ${site.established}`,
     type: "website",
+    siteName: site.teamName,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: site.teamName,
+    description: `${site.league} · ${site.conference} · Est. ${site.established}`,
   },
 };
 
@@ -41,7 +62,13 @@ export default function RootLayout({
       lang="en"
       className={`${barlowCondensed.variable} ${barlow.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      {/*
+        suppressHydrationWarning: browser extensions (Grammarly, etc.) inject
+        data-* attributes into <body> before React hydrates, which trips a
+        false hydration warning. This suppresses only <body>'s own attribute
+        noise — real mismatches in the tree still surface normally.
+      */}
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
         {/*
           The fixed field layer. Rendered once here so it persists across
           route changes — navigating between pages doesn't reload or jump the

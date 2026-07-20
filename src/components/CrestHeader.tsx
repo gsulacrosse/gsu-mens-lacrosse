@@ -60,9 +60,17 @@ export default function CrestHeader() {
           </span>
         </Link>
 
-        <span className="flex-1" />
+        <span className="hidden flex-1 sm:block" />
 
-        <nav aria-label="Main" className="flex">
+        {/*
+          Horizontally scrollable on narrow phones so five items never break
+          the layout or force a wrap. On wider screens it just sits inline.
+        */}
+        <nav
+          aria-label="Main"
+          className="flex min-w-0 flex-1 justify-end overflow-x-auto sm:flex-none"
+          style={{ scrollbarWidth: "none" }}
+        >
           {NAV.map((item) => {
             const active = pathname === item.href;
             return (
@@ -70,11 +78,11 @@ export default function CrestHeader() {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className="display flex cursor-pointer items-center justify-center px-2.5 transition-colors duration-200 sm:px-3"
+                className="display flex flex-none cursor-pointer items-center justify-center whitespace-nowrap px-2 transition-colors duration-200 sm:px-3"
                 style={{
                   minHeight: 44,
-                  fontSize: "0.72rem",
-                  letterSpacing: "0.13em",
+                  fontSize: "0.7rem",
+                  letterSpacing: "0.11em",
                   color: active ? "var(--gs-gold)" : "var(--text-primary)",
                   borderBottom: `2px solid ${active ? "var(--gs-gold)" : "transparent"}`,
                 }}

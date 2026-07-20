@@ -1,0 +1,28 @@
+{
+  "_readme": "Photos for the gallery and scattered around the site. To add a photo: drop the file in public/brand/photos/, then add an entry here with src (path under /brand/photos/), alt (describe it for screen readers), w and h (the image's pixel width and height — right-click the file > Properties > Details on Windows, or just estimate the ratio). Captions are optional and should stay factual — jersey numbers and opponents only, no made-up player names.",
+
+  "photos": [
+    { "src": "/brand/photos/celebration-night.jpg", "alt": "Two GS players leaping to celebrate a goal under the lights", "caption": "", "w": 951, "h": 1080, "feature": true },
+    { "src": "/brand/photos/action-southern-1.jpg", "alt": "GS #1 defending in the navy Southern jersey", "caption": "", "w": 2799, "h": 2576, "feature": true },
+    { "src": "/brand/photos/shot-11-tampa.jpg", "alt": "GS #11 shooting on goal against Tampa", "caption": "vs Tampa", "w": 1366, "h": 887, "feature": true },
+    { "src": "/brand/photos/action-southern-26.jpg", "alt": "GS #26 driving upfield in the navy Southern jersey", "caption": "", "w": 4088, "h": 2717, "feature": true },
+    { "src": "/brand/photos/action-43-shot.jpg", "alt": "GS #43 winding up for a shot in the white Eagles jersey", "caption": "", "w": 1998, "h": 1670, "feature": false },
+    { "src": "/brand/photos/night-defense.jpg", "alt": "GS #37 and #33 defending under the lights against Tampa", "caption": "vs Tampa", "w": 1391, "h": 785, "feature": true },
+    { "src": "/brand/photos/team-huddle.jpg", "alt": "The GS team huddled together before a game", "caption": "", "w": 4596, "h": 1805, "feature": false },
+    { "src": "/brand/photos/goalie-41.jpg", "alt": "GS goalie #41 carrying the ball out of the net", "caption": "", "w": 1440, "h": 2118, "feature": false },
+    { "src": "/brand/photos/action-67.jpg", "alt": "GS #67 with the ball in the navy Southern jersey", "caption": "", "w": 1517, "h": 2750, "feature": false },
+    { "src": "/brand/photos/action-11-score.jpg", "alt": "GS #11 scoring against Charleston", "caption": "vs Charleston", "w": 3164, "h": 2319, "feature": false },
+    { "src": "/brand/photos/action-pole-2.jpg", "alt": "GS #2 defending with a long pole against Tampa", "caption": "vs Tampa", "w": 3363, "h": 3867, "feature": false },
+    { "src": "/brand/photos/faceoff-night.jpg", "alt": "A faceoff under the lights", "caption": "", "w": 1620, "h": 1080, "feature": false },
+    { "src": "/brand/photos/goal-celebration.jpg", "alt": "GS players celebrating a goal against Tampa", "caption": "vs Tampa", "w": 1620, "h": 1080, "feature": false },
+    { "src": "/brand/photos/team-sideline.jpg", "alt": "The full GS roster lined up on the sideline", "caption": "", "w": 5611, "h": 2560, "feature": false },
+    { "src": "/brand/photos/action-crease-d.jpg", "alt": "A GS defender guarding the crease against Tampa", "caption": "vs Tampa", "w": 3139, "h": 3627, "feature": false },
+    { "src": "/brand/photos/defense-set.jpg", "alt": "GS defensive set with goalie #41", "caption": "", "w": 1620, "h": 1080, "feature": false },
+    { "src": "/brand/photos/faceoff-center.jpg", "alt": "A faceoff at midfield against Tampa", "caption": "vs Tampa", "w": 1620, "h": 1080, "feature": false }
+  ],
+
+  "graphics": [
+    { "src": "/brand/photos/graphic-bull-win.jpg", "alt": "Team graphic: GSU rides the bull for the win, 14-8 over South Florida", "caption": "", "w": 1728, "h": 2304 },
+    { "src": "/brand/photos/graphic-gameday.jpg", "alt": "Team game day graphic: GSU vs Charleston and Wake Forest, February 7 2026", "caption": "", "w": 1330, "h": 1290 }
+  ]
+}

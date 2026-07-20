@@ -24,9 +24,11 @@
 
   "assets": {
     "crest": "/brand/crest.svg",
-    "fieldPhoto": "/brand/team-photo.svg"
+    "fieldPhoto": "/brand/photos/team-huddle.jpg",
+    "heroVideo": "/brand/reel.mp4",
+    "heroPoster": "/brand/photos/team-huddle.jpg"
   },
-  "_assetsNote": "When the real team photo arrives, drop it at public/brand/team-photo.jpg and change fieldPhoto to \"/brand/team-photo.jpg\". Same for the crest. See ASSETS-NEEDED.md.",
+  "_assetsNote": "crest is STILL a placeholder — no real logo file was provided yet (see ASSETS-NEEDED.md). fieldPhoto and heroVideo now use real team media. To swap the crest later, drop the real file at public/brand/ and update the path here.",
 
   "_nextFixtureNote": "There is no separate 'next event' setting. The home page shows the first game in schedule.json that has no result recorded. Add games there and the home page follows automatically."
 }
