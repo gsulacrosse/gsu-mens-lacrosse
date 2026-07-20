@@ -1,11 +1,9 @@
 /**
  * The site's canonical URL. Used for social-share tags, sitemap, and robots.
  *
- * Set NEXT_PUBLIC_SITE_URL in the Vercel project settings once the real
- * domain is connected (e.g. https://gsueagleslax.com). Until then it falls
- * back to the Vercel preview URL, and finally to localhost for dev.
+ * The club's live domain. If the domain ever changes, update it here (or set
+ * NEXT_PUBLIC_SITE_URL in the Vercel project settings to override without a
+ * code change).
  */
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "") ||
-  "http://localhost:3000";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://gsulacrosse.com";
