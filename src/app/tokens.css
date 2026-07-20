@@ -4,27 +4,24 @@
    This is the single file a designer edits to restyle the whole site.
    Every color, size, and spacing value used anywhere lives here.
 
-   >>> TODO: CONFIRM BRAND COLORS WITH THE TEAM <<<
-   The navy and gold below are PLACEHOLDERS. They have NOT been verified
-   against Georgia Southern's official brand guide or the club's logo files.
-   Do not treat them as correct. Ask the team (or whoever holds the vector
-   crest) for the exact hex values, then replace the three values marked
-   UNCONFIRMED below. Nothing else needs to change.
+   Brand colors below are sampled from the team's real crest (crest.png):
+   navy #011e41 is Georgia Southern's official navy; the gold matches the
+   crest's wordmark, lifted slightly for legibility on the dark background.
    ========================================================================== */
 
 :root {
-  /* --- Brand palette ---------------------------------------------------- */
-  --gs-navy: #0a1f44; /* UNCONFIRMED placeholder */
-  --gs-navy-deep: #05122a; /* UNCONFIRMED placeholder */
-  --gs-gold: #b5a16b; /* UNCONFIRMED placeholder */
+  /* --- Brand palette (sampled from the real crest) ---------------------- */
+  --gs-navy: #011e41; /* GS official navy — matches crest */
+  --gs-navy-deep: #01142c;
+  --gs-gold: #a88c5c; /* crest gold, lifted for contrast on navy */
   --gs-white: #ffffff;
 
   /* Panel fill. Near-opaque on purpose: a team photo is visually busy, so
      text never sits directly on it. The photo reads in the GAPS between
      panels, not behind the words. Do not lower this below 0.90 without
      re-checking contrast. */
-  --panel-bg: rgba(10, 31, 68, 0.94);
-  --panel-bg-solid: #0a1f44;
+  --panel-bg: rgba(1, 30, 65, 0.94);
+  --panel-bg-solid: #011e41;
 
   /* --- Text ------------------------------------------------------------- */
   --text-primary: #ffffff;
@@ -33,7 +30,7 @@
 
   /* --- Lines & edges ---------------------------------------------------- */
   /* Gold is a HIGHLIGHT, never a fill. Hairlines and accents only. */
-  --rule-gold: rgba(181, 161, 107, 0.85);
+  --rule-gold: rgba(168, 140, 92, 0.9);
   --rule-faint: rgba(255, 255, 255, 0.14);
 
   /* Hard edges throughout — this is a printed program, not a SaaS card. */

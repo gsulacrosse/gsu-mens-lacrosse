@@ -8,9 +8,12 @@ import FeaturedReel from "@/components/FeaturedReel";
 
 type Game = {
   date: string;
+  dateLabel?: string;
   opponent: string;
   home: boolean;
   location?: string;
+  note?: string;
+  season?: string;
   result?: string;
 };
 
@@ -22,9 +25,12 @@ const fmt = (iso: string) =>
 
 export default function Home() {
   const games = schedule as Game[];
-  const upcoming = games.filter((g) => !g.result);
+  // Next fixture = the soonest DATED game without a result. Undated (TBD)
+  // games are real but can't be "next", so they're excluded from this pick.
+  const next = games
+    .filter((g) => !g.result && g.date)
+    .sort((a, b) => a.date.localeCompare(b.date))[0];
   const played = games.filter((g) => g.result).slice(-6).reverse();
-  const next = upcoming[0];
 
   return (
     <>
@@ -67,6 +73,11 @@ export default function Home() {
                     </span>
                   )}
                 </div>
+                {next.note && (
+                  <p className="mt-2" style={{ color: "var(--text-muted)", fontSize: "0.82rem" }}>
+                    {next.note}
+                  </p>
+                )}
               </>
             ) : (
               <>

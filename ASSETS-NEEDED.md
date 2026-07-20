@@ -30,23 +30,14 @@ for the original from their camera roll.
 
 ---
 
-## 2. The real crest — vector if possible
+## 2. The real crest — DONE (vector still nice-to-have)
 
-The placeholder is deliberately **not** a copy of the club's actual crest. The
-real one is a circular navy/white badge with an eagle head holding a lacrosse
-stick and "GEORGIA SOUTHERN LACROSSE" around the ring. Drawing an approximation
-from a description would produce a fake logo someone might ship by accident, so
-the placeholder is plainly generic instead.
+The real crest is in place (`public/brand/crest.png`, transparent background)
+and drives the header, favicon, and the site's navy/gold.
 
-**Ask for**, best first:
-1. Original vector — `.svg`, `.ai`, `.eps`, or `.pdf`. Whoever designed it, or
-   the current designer, likely has this.
-2. Failing that, the largest PNG with a transparent background.
-3. Last resort — Instagram lets you download your own profile photo at full
-   resolution from account settings. Better than a screenshot, still not vector.
-
-**Install:** save as `public/brand/crest.svg` (or `.png` and update
-`assets.crest` in `site.json`).
+Still worth chasing only if easy: the **vector** original (`.svg`, `.ai`,
+`.eps`, `.pdf`). It would render razor-sharp at any size. The PNG is good for
+web; vector is just the belt-and-suspenders version. Not urgent.
 
 ---
 

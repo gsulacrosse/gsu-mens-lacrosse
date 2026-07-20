@@ -23,7 +23,7 @@
   "_tiktokNote": "Leave tiktok as \"\" until the exact handle is confirmed. An empty string hides the link rather than shipping a broken one.",
 
   "assets": {
-    "crest": "/brand/crest.svg",
+    "crest": "/brand/crest.png",
     "fieldPhoto": "/brand/photos/team-huddle.jpg",
     "heroVideo": "/brand/reel.mp4",
     "heroPoster": "/brand/photos/team-huddle.jpg"

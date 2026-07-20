@@ -37,11 +37,18 @@ next fixture. You don't set that separately.
 ]
 ```
 
-- `date` — always `YYYY-MM-DD`.
+- `date` — always `YYYY-MM-DD`. **Leave it empty (`""`) for a TBD game** and
+  add `"dateLabel": "TBD"` so it still shows.
 - `home` — `true` for home games, `false` for away.
-- `location` — optional.
+- `location` — optional (e.g. `"Athens, GA"`).
+- `season` — optional label the games are grouped under on the Schedule page
+  (e.g. `"Fall 2026"`, `"Spring 2027"`).
+- `note` — optional short note shown under the game (e.g. `"Pending confirmation"`).
 - `result` — **leave this out entirely until the game is played.** Once you add
-  it, the game moves from "next fixture" to "recent results."
+  it (e.g. `"W 14-8"`), the game shows up under "Past scores" on the home page.
+
+The home page automatically highlights the soonest game that has a real date
+and no result. TBD games never become the "next fixture."
 
 Empty schedule? Leave it as `[]` and the site says "To be announced."
 

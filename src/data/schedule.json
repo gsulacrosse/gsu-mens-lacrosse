@@ -1,1 +1,17 @@
-[]
+[
+  { "date": "", "dateLabel": "TBD", "opponent": "Alumni Game", "home": true, "season": "Fall 2026" },
+  { "date": "", "dateLabel": "TBD", "opponent": "SCAD", "home": true, "season": "Fall 2026" },
+  { "date": "2026-11-15", "opponent": "UGA", "home": false, "location": "Athens, GA", "season": "Fall 2026" },
+  { "date": "2026-11-15", "opponent": "Wisconsin", "home": false, "location": "Athens, GA", "season": "Fall 2026" },
+
+  { "date": "2027-01-27", "opponent": "The Citadel", "home": true, "season": "Spring 2027" },
+  { "date": "2027-02-06", "opponent": "Charleston", "home": true, "season": "Spring 2027" },
+  { "date": "2027-02-06", "opponent": "Wake Forest", "home": true, "note": "Pending confirmation", "season": "Spring 2027" },
+  { "date": "2027-02-19", "opponent": "UNC Wilmington", "home": false, "location": "Wilmington, NC", "season": "Spring 2027" },
+  { "date": "2027-02-20", "opponent": "UNC Charlotte", "home": false, "location": "Wilmington, NC", "season": "Spring 2027" },
+  { "date": "2027-03-05", "opponent": "Tulane", "home": false, "season": "Spring 2027" },
+  { "date": "2027-03-06", "opponent": "Houston", "home": false, "season": "Spring 2027" },
+  { "date": "2027-04-03", "opponent": "Kennesaw State", "home": false, "location": "Kennesaw, GA", "season": "Spring 2027" },
+  { "date": "2027-04-11", "opponent": "North Florida", "home": false, "location": "Jacksonville, FL", "season": "Spring 2027" },
+  { "date": "2027-04-23", "opponent": "SELC Tournament", "home": false, "location": "Jacksonville, FL", "season": "Spring 2027" }
+]
