@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import schedule from "@/data/schedule.json";
 import { PageShell, EmptyState, Block } from "@/components/PageShell";
+import OpponentLogo from "@/components/OpponentLogo";
 
 export const metadata: Metadata = { title: "Schedule" };
 
@@ -11,6 +12,7 @@ type Game = {
   home: boolean;
   location?: string;
   note?: string;
+  logo?: string;
   season?: string;
   result?: string;
 };
@@ -53,7 +55,7 @@ export default function SchedulePage() {
                 .map((game, i) => (
                   <li
                     key={`${game.date}-${game.opponent}-${i}`}
-                    className="flex flex-wrap items-baseline gap-x-4 gap-y-1 py-4"
+                    className="flex flex-wrap items-center gap-x-4 gap-y-1 py-4"
                     style={{ borderBottom: "1px solid var(--rule-faint)" }}
                   >
                     <span
@@ -73,9 +75,10 @@ export default function SchedulePage() {
                     >
                       {game.home ? "Home" : "Away"}
                     </span>
+                    <OpponentLogo src={game.logo} name={game.opponent} size={40} />
                     <span
                       className="display flex-1"
-                      style={{ fontSize: "var(--step-tile)", minWidth: "10rem" }}
+                      style={{ fontSize: "var(--step-tile)", minWidth: "8rem" }}
                     >
                       {game.opponent}
                     </span>

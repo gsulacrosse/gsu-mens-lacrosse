@@ -5,6 +5,7 @@ import { NAV } from "@/lib/nav";
 import { ArrowIcon } from "@/components/icons";
 import VideoHero from "@/components/VideoHero";
 import FeaturedReel from "@/components/FeaturedReel";
+import OpponentLogo from "@/components/OpponentLogo";
 
 type Game = {
   date: string;
@@ -13,6 +14,7 @@ type Game = {
   home: boolean;
   location?: string;
   note?: string;
+  logo?: string;
   season?: string;
   result?: string;
 };
@@ -51,9 +53,12 @@ export default function Home() {
             <p className="kicker">Next fixture</p>
             {next ? (
               <>
-                <h2 className="display mt-2.5" style={{ fontSize: "var(--step-title)" }}>
-                  {next.opponent}
-                </h2>
+                <div className="mt-2.5 flex items-center gap-4">
+                  <OpponentLogo src={next.logo} name={next.opponent} size={64} />
+                  <h2 className="display" style={{ fontSize: "var(--step-title)" }}>
+                    {next.opponent}
+                  </h2>
+                </div>
                 <div className="mt-3 flex flex-wrap items-baseline gap-x-6 gap-y-2">
                   <span className="numeral" style={{ fontSize: "var(--step-tile)" }}>
                     {fmt(next.date)}
@@ -106,7 +111,7 @@ export default function Home() {
                 {played.map((g) => (
                   <li
                     key={`${g.date}-${g.opponent}`}
-                    className="flex items-baseline gap-3 py-2.5"
+                    className="flex items-center gap-3 py-2.5"
                     style={{ borderBottom: "1px solid var(--rule-faint)" }}
                   >
                     <span
@@ -115,6 +120,7 @@ export default function Home() {
                     >
                       {fmt(g.date)}
                     </span>
+                    <OpponentLogo src={g.logo} name={g.opponent} size={28} />
                     <span className="display flex-1" style={{ fontSize: "0.98rem" }}>
                       {g.opponent}
                     </span>
@@ -177,6 +183,26 @@ export default function Home() {
 
         {/* ================= FEATURED REEL (sound on tap) ================= */}
         <FeaturedReel />
+
+        {/* ================= AFFILIATIONS ================= */}
+        <section
+          className="rise flex flex-wrap items-center gap-x-5 gap-y-3 py-7"
+          style={{ borderTop: "1px solid var(--rule-faint)" }}
+        >
+          <p className="kicker">Affiliations</p>
+          <div className="flex items-center gap-3">
+            <OpponentLogo src="/brand/logos/selc.png" name="SELC" size={44} />
+            <span className="display" style={{ fontSize: "0.9rem", letterSpacing: "0.08em" }}>
+              SELC North
+            </span>
+          </div>
+          <span
+            className="display"
+            style={{ fontSize: "0.9rem", letterSpacing: "0.08em", color: "var(--text-muted)" }}
+          >
+            MCLA Division II
+          </span>
+        </section>
 
         {/* ================= JOIN ================= */}
         <section className="rise flex flex-wrap items-center gap-5 py-8 sm:py-11">

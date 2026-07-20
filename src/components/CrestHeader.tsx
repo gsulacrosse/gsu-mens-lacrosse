@@ -32,12 +32,12 @@ export default function CrestHeader() {
           className="flex cursor-pointer items-center gap-3"
         >
           <Image
-            src={site.assets.crest}
+            src={site.assets.crestMark}
             alt=""
-            width={96}
-            height={96}
+            width={128}
+            height={128}
             priority
-            style={{ width: 46, height: 46 }}
+            className="h-[52px] w-[52px] sm:h-[64px] sm:w-[64px]"
           />
           <span className="hidden sm:block">
             <span

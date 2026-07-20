@@ -24,6 +24,7 @@
 
   "assets": {
     "crest": "/brand/crest.png",
+    "crestMark": "/brand/crest-mark.png",
     "fieldPhoto": "/brand/photos/team-huddle.jpg",
     "heroVideo": "/brand/reel.mp4",
     "heroPoster": "/brand/photos/team-huddle.jpg"

@@ -6,4 +6,4 @@
  * code change).
  */
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://gsulacrosse.com";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.gsulacrosse.com";
