@@ -6,6 +6,7 @@ import { ArrowIcon } from "@/components/icons";
 import VideoHero from "@/components/VideoHero";
 import FeaturedReel from "@/components/FeaturedReel";
 import OpponentLogo from "@/components/OpponentLogo";
+import Honors from "@/components/Honors";
 
 type Game = {
   date: string;
@@ -180,6 +181,9 @@ export default function Home() {
             </Link>
           ))}
         </nav>
+
+        {/* ================= HONORS (hidden until real data) ============== */}
+        <Honors />
 
         {/* ================= FEATURED REEL (sound on tap) ================= */}
         <FeaturedReel />

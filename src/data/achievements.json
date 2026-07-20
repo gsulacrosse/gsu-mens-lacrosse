@@ -1,0 +1,52 @@
+{
+  "_readme": "Program honors — VERIFIED from official MCLA sources only. Empty lists stay hidden. Never add a year, name, or title that isn't confirmed by a source. Sources are kept in _sources for reference.",
+
+  "titles": [],
+  "_titlesNote": "SELC Tournament Championships would go here as { \"label\": \"SELC Tournament Champions\", \"years\": [..] }. None found in the record as of 2026 — left empty (hidden) until/unless one is won.",
+
+  "awards": [
+    {
+      "label": "GSU Club Sports Coach of the Year",
+      "recipients": [
+        { "year": 2026, "name": "Andrew Jenkins" }
+      ]
+    }
+  ],
+  "_awardsNote": "The GSU campus Club Sports award (distinct from SELC Coach of the Year). Self-reported by the club. Fill in the coach's name; an entry with an empty name is hidden until the name is added.",
+
+  "postseason": {
+    "label": "SELC Division II Playoffs",
+    "years": [2026, 2025, 2024, 2023, 2022],
+    "note": "Five straight appearances (2022–2026). Won the 2026 first round over Florida Gulf Coast, 18–12."
+  },
+
+  "allConference": [
+    {
+      "year": 2026,
+      "honorees": [
+        { "name": "Brady Gillis", "pos": "D", "team": "1st Team" },
+        { "name": "Brendan Lightsey", "pos": "D", "team": "3rd Team" },
+        { "name": "Gavin Holwill", "pos": "G", "team": "3rd Team" }
+      ]
+    },
+    {
+      "year": 2025,
+      "honorees": [
+        { "name": "Kevin Daniels", "pos": "A", "team": "2nd Team" },
+        { "name": "Wes Sowders", "pos": "D", "team": "2nd Team" },
+        { "name": "Mikey Canavan", "pos": "M", "team": "3rd Team" },
+        { "name": "Brady Gillis", "pos": "D", "team": "3rd Team" }
+      ]
+    }
+  ],
+
+  "_sources": {
+    "allConference2026": "https://mcla.us/articles/selc-unveils-division-ii-all-conference-honors",
+    "allConference2025": "https://mcla.us/articles/selc-ii-all-conference-team-released",
+    "playoffs2022": "https://mcla.us/teams/georgia-southern/2022/schedule",
+    "playoffs2023": "https://mcla.us/teams/georgia-southern/2023/schedule",
+    "playoffs2024": "https://mcla.us/teams/georgia-southern/2024/schedule",
+    "playoffs2025": "https://mcla.us/teams/georgia-southern/2025/schedule",
+    "playoffs2026": "https://mcla.us/teams/georgia-southern/2026/schedule"
+  }
+}
