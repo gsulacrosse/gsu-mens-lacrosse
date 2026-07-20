@@ -1,6 +1,7 @@
 import achievements from "@/data/achievements.json";
 
 type Title = { label: string; years: number[] };
+type Ranking = { year: number; poll: string; peak: number; final?: number; note?: string };
 type Postseason = { label: string; years: number[]; note?: string };
 type Honoree = { name: string; pos?: string; team?: string };
 type AllConfYear = { year: number; honorees: Honoree[] };
@@ -15,6 +16,7 @@ export default function Honors() {
   const titles = (achievements.titles as Title[]).filter((t) => t.years.length > 0);
   const postseason = achievements.postseason as Postseason | undefined;
   const hasPostseason = !!postseason && postseason.years.length > 0;
+  const rankings = (achievements.rankings as Ranking[] | undefined) ?? [];
   const allConf = (achievements.allConference as AllConfYear[]).filter(
     (y) => y.honorees.length > 0,
   );
@@ -25,6 +27,7 @@ export default function Honors() {
 
   if (
     titles.length === 0 &&
+    rankings.length === 0 &&
     !hasPostseason &&
     allConf.length === 0 &&
     awards.length === 0
@@ -69,6 +72,33 @@ export default function Honors() {
           <div key={t.label}>
             {label(t.label)}
             {yearRow(t.years)}
+          </div>
+        ))}
+
+        {/* National ranking — the headliner: a big peak number */}
+        {rankings.map((r) => (
+          <div key={r.year}>
+            {label(`${r.poll} · ${r.year}`)}
+            <div className="mt-2 flex items-baseline gap-3">
+              <span
+                className="numeral"
+                style={{ fontSize: "var(--step-hero)", color: "var(--gs-gold)", lineHeight: 0.9 }}
+              >
+                #{r.peak}
+              </span>
+              <span
+                className="display"
+                style={{ fontSize: "0.8rem", letterSpacing: "0.14em", color: "var(--text-muted)" }}
+              >
+                Peak national
+                {r.final ? ` · Finished #${r.final}` : ""}
+              </span>
+            </div>
+            {r.note && (
+              <p className="mt-2" style={{ color: "var(--text-muted)", maxWidth: "52ch" }}>
+                {r.note}
+              </p>
+            )}
           </div>
         ))}
 
