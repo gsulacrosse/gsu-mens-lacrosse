@@ -8,6 +8,10 @@
 html {
   background-color: var(--gs-navy-deep);
   -webkit-text-size-adjust: 100%;
+  /* Root size lifted from 16px so every rem-based size across the site scales
+     up together — the simplest way to make all text a touch larger/easier to
+     read. Adjust this one value to nudge the whole site's text up or down. */
+  font-size: 106.25%; /* ~17px base */
 }
 
 body {

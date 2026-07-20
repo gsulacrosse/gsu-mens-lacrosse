@@ -53,25 +53,38 @@ export default function VideoHero() {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, rgba(5,18,42,0.35) 0%, rgba(5,18,42,0.35) 45%, rgba(5,18,42,0.9) 100%)",
+            "linear-gradient(180deg, rgba(5,18,42,0.30) 0%, rgba(5,18,42,0.40) 40%, rgba(5,18,42,0.97) 100%)",
         }}
       />
 
       <div className="shell relative flex h-full flex-col justify-end pb-8 sm:pb-12">
+        {/* Gold accent bar — a small mark that anchors the title */}
+        <span
+          aria-hidden="true"
+          className="mb-4 block"
+          style={{ width: 68, height: 5, background: "var(--gs-gold)" }}
+        />
         <h1
           className="display"
-          style={{ fontSize: "var(--step-hero)", textShadow: "0 2px 40px rgba(5,18,42,0.75)" }}
+          style={{
+            fontSize: "var(--step-hero)",
+            /* Layered shadow so the type punches off the busy video without a
+               heavy box behind it: a tight dark edge + a soft wide glow. */
+            textShadow:
+              "0 2px 2px rgba(5,18,42,0.9), 0 4px 30px rgba(5,18,42,0.8), 0 0 1px rgba(5,18,42,0.9)",
+          }}
         >
           Georgia Southern
           <br />
           <span style={{ color: "var(--gs-gold)" }}>Men&rsquo;s Lacrosse</span>
         </h1>
         <div
-          className="mt-4 flex flex-wrap gap-x-3 gap-y-1"
+          className="mt-5 flex flex-wrap gap-x-3 gap-y-1"
           style={{
-            fontSize: "0.74rem",
+            fontSize: "0.8rem",
             letterSpacing: "0.16em",
-            color: "#e6ebf3",
+            color: "#eef2f8",
+            textShadow: "0 1px 12px rgba(5,18,42,0.9)",
           }}
         >
           {["Est. " + site.established, site.league, site.conference, site.homeVenue].map(
