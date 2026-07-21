@@ -1,8 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
-import site from "@/data/site.json";
+import Loader from "@/components/Loader";
 
 type Phase = "loading" | "armed" | "done";
 
@@ -112,26 +111,7 @@ export default function IntroSequence() {
 
   return (
     <>
-      {phase === "loading" && (
-        <div
-          className={`loader${loaderLeaving ? " is-leaving" : ""}`}
-          role="status"
-          aria-label="Loading"
-        >
-          <Image
-            className="loader-crest"
-            src={site.assets.crestMark}
-            alt=""
-            width={128}
-            height={128}
-            priority
-          />
-          <div className="loader-rail" aria-hidden="true">
-            <span className="loader-ball" />
-          </div>
-          <span className="loader-word">Georgia Southern Lacrosse</span>
-        </div>
-      )}
+      {phase === "loading" && <Loader leaving={loaderLeaving} />}
 
       {phase === "armed" && !fired && <span className="intro-hint">Scroll</span>}
     </>

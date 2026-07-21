@@ -1,15 +1,13 @@
-"use client";
-
 import Image from "next/image";
-import { useEffect, useRef } from "react";
 import site from "@/data/site.json";
 
 /**
  * The slanted athletic wordmark with GUS leaning on the end of it. Everything
  * scales from `fontSize`, so the same lockup is used big in the hero and small
- * in the header — one source of truth. GUS's height is matched in JS to the
- * stacked wordmark. `heading` renders the word as an <h1> (hero, for SEO);
- * otherwise a <span> (header). `animate` plays the entrance.
+ * in the header — one source of truth. GUS's height is set in CSS (em-based,
+ * see `.wm-mascot`) so he is his final size from the very first frame — no
+ * JS measuring, no growing on load. `heading` renders the word as an <h1>
+ * (hero, for SEO); otherwise a <span>. `animate` tags the intro drop hooks.
  */
 export default function Wordmark({
   fontSize,
@@ -20,21 +18,6 @@ export default function Wordmark({
   animate?: boolean;
   heading?: boolean;
 }) {
-  const wordRef = useRef<HTMLElement>(null);
-  const mascotRef = useRef<HTMLImageElement>(null);
-
-  useEffect(() => {
-    const fit = () => {
-      const w = wordRef.current;
-      const m = mascotRef.current;
-      if (w && m) m.style.height = `${w.getBoundingClientRect().height}px`;
-    };
-    fit();
-    window.addEventListener("resize", fit);
-    if (document.fonts?.ready) document.fonts.ready.then(fit);
-    return () => window.removeEventListener("resize", fit);
-  }, [fontSize]);
-
   const wordInner = (
     <>
       <span aria-hidden="true">Georgia&nbsp;Southern</span>
@@ -45,17 +28,12 @@ export default function Wordmark({
   return (
     <span className="wm-lockup" style={{ fontSize }}>
       {heading ? (
-        <h1
-          className={`wm-word ${animate ? "hero-word-anim" : ""}`}
-          ref={wordRef as React.RefObject<HTMLHeadingElement>}
-          aria-label={site.teamName}
-        >
+        <h1 className={`wm-word ${animate ? "hero-word-anim" : ""}`} aria-label={site.teamName}>
           {wordInner}
         </h1>
       ) : (
         <span
           className={`wm-word ${animate ? "hero-word-anim" : ""}`}
-          ref={wordRef as React.RefObject<HTMLSpanElement>}
           aria-label={site.teamName}
           role="img"
         >
@@ -63,7 +41,6 @@ export default function Wordmark({
         </span>
       )}
       <Image
-        ref={mascotRef}
         className={`wm-mascot ${animate ? "hero-mascot-anim" : ""}`}
         src="/brand/mascot-gus.png"
         alt=""

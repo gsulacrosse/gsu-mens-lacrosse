@@ -7,6 +7,7 @@ import { SITE_URL } from "@/lib/site-url";
 import CrestHeader from "@/components/CrestHeader";
 import SiteFooter from "@/components/SiteFooter";
 import ScrollProgress from "@/components/ScrollProgress";
+import RouteLoader from "@/components/RouteLoader";
 import "./globals.css";
 
 const barlowCondensed = Barlow_Condensed({
@@ -125,6 +126,7 @@ export default function RootLayout({
           aria-hidden="true"
         />
 
+        <RouteLoader />
         <CrestHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />

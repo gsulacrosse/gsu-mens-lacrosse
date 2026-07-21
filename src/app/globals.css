@@ -163,6 +163,10 @@ body {
 
 .wm-mascot {
   width: auto;
+  /* Sized in em to match the two stacked lines of the wordmark, so GUS is his
+     final size from the first frame — no JS measuring, no growing on load.
+     (word block ≈ 1.36em tall at line-height 0.84; 1.4em sits him just right.) */
+  height: 1.4em;
   align-self: flex-end;
   transform: rotate(-15deg);
   transform-origin: bottom left;
