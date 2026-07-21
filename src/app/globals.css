@@ -241,6 +241,15 @@ body {
   justify-content: center;
   gap: 22px;
   background: radial-gradient(120% 90% at 50% 22%, #0a2350, var(--gs-navy-deep));
+  /* FAILSAFE: the loader is server-rendered and covers the whole page, so if
+     the JavaScript never runs (blocked assets, a network intercepting the
+     domain, a bad cache) the site would be trapped behind it. This pure-CSS
+     fade auto-reveals the page after 8s with no JS at all. When JS works
+     normally it removes the loader long before this ever fires. */
+  animation: loaderFailsafe 0.5s 8s forwards;
+}
+@keyframes loaderFailsafe {
+  to { opacity: 0; visibility: hidden; pointer-events: none; }
 }
 .loader.is-leaving {
   animation: loaderOut 0.5s cubic-bezier(0.5, 0, 0.2, 1) forwards;
