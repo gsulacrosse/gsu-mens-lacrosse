@@ -6,12 +6,14 @@ import site from "@/data/site.json";
 import { SITE_URL } from "@/lib/site-url";
 import CrestHeader from "@/components/CrestHeader";
 import SiteFooter from "@/components/SiteFooter";
+import ScrollProgress from "@/components/ScrollProgress";
 import "./globals.css";
 
 const barlowCondensed = Barlow_Condensed({
   variable: "--font-barlow-condensed",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["500", "600", "700", "800"],
+  style: ["normal", "italic"],
 });
 
 const barlow = Barlow({
@@ -89,6 +91,7 @@ export default function RootLayout({
         <CrestHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />
+        <ScrollProgress />
         <Analytics />
       </body>
     </html>

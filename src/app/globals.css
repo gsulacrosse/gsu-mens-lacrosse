@@ -127,6 +127,101 @@ body {
 }
 
 /* ==========================================================================
+   HERO LOCKUP — slanted athletic wordmark + GUS leaning on it
+
+   The wordmark is set in an aggressive italic + extra skew to match the
+   Georgia Southern athletic logo. GUS's height is matched in JS to the
+   stacked wordmark so he's exactly as tall as the two lines, and he leans
+   in from the right where the text ends.
+   ========================================================================== */
+
+.hero-lockup {
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
+}
+
+.hero-wordmark {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 0.84;
+  white-space: nowrap;
+  transform: skewX(-9deg);
+  transform-origin: left bottom;
+  -webkit-text-stroke: 1.5px rgba(1, 20, 44, 0.55);
+  text-shadow: 3px 4px 0 var(--gs-gold), 4px 7px 12px rgba(0, 0, 0, 0.5);
+  font-size: clamp(1.55rem, 7.4vw, 4.6rem);
+}
+.hero-wordmark small {
+  display: block;
+  font-size: 0.62em;
+}
+
+.hero-mascot {
+  width: auto;
+  align-self: flex-end;
+  transform: rotate(-15deg);
+  transform-origin: bottom left;
+  filter: drop-shadow(-8px 12px 18px rgba(0, 0, 0, 0.5));
+  margin-left: -0.3em; /* tuck him against the end of the text */
+  margin-bottom: 0.1em;
+  flex: none;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   SCROLL-PROGRESS BALL — a lacrosse ball rides a gold rail down the edge
+   ========================================================================== */
+
+.scroll-rail {
+  position: fixed;
+  right: 8px;
+  top: 92px;
+  bottom: 22px;
+  width: 14px;
+  z-index: 20;
+  pointer-events: none;
+}
+.scroll-rail::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  transform: translateX(-50%);
+  background: var(--rule-faint);
+}
+.scroll-rail-fill {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 2px;
+  height: 0;
+  transform: translateX(-50%);
+  background: var(--rule-gold);
+}
+.scroll-ball {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 35% 30%, #ffffff, #eef0ea 45%, #c9cdc2 100%);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4), 0 0 8px 2px rgba(255, 255, 255, 0.35);
+}
+@media (max-width: 520px) {
+  .scroll-rail {
+    right: 4px;
+  }
+}
+
+/* ==========================================================================
    MOTION — short upward translate on entry. That's the whole vocabulary.
    ========================================================================== */
 

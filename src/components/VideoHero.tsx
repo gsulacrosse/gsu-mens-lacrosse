@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 import site from "@/data/site.json";
 
@@ -14,6 +15,23 @@ import site from "@/data/site.json";
  */
 export default function VideoHero() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const wordmarkRef = useRef<HTMLHeadingElement>(null);
+  const mascotRef = useRef<HTMLImageElement>(null);
+
+  // Match GUS's height to the stacked wordmark so he's exactly as tall as the
+  // two text lines, at every screen size.
+  useEffect(() => {
+    const fit = () => {
+      const w = wordmarkRef.current;
+      const m = mascotRef.current;
+      if (w && m) m.style.height = `${w.getBoundingClientRect().height}px`;
+    };
+    fit();
+    window.addEventListener("resize", fit);
+    // Re-fit once fonts are ready (wordmark height depends on the loaded font)
+    if (document.fonts?.ready) document.fonts.ready.then(fit);
+    return () => window.removeEventListener("resize", fit);
+  }, []);
 
   useEffect(() => {
     const v = videoRef.current;
@@ -64,20 +82,24 @@ export default function VideoHero() {
           className="mb-4 block"
           style={{ width: 68, height: 5, background: "var(--gs-gold)" }}
         />
-        <h1
-          className="display"
-          style={{
-            fontSize: "var(--step-hero)",
-            /* Layered shadow so the type punches off the busy video without a
-               heavy box behind it: a tight dark edge + a soft wide glow. */
-            textShadow:
-              "0 2px 2px rgba(5,18,42,0.9), 0 4px 30px rgba(5,18,42,0.8), 0 0 1px rgba(5,18,42,0.9)",
-          }}
-        >
-          Georgia Southern
-          <br />
-          <span style={{ color: "var(--gs-gold)" }}>Men&rsquo;s Lacrosse</span>
-        </h1>
+
+        {/* Slanted athletic wordmark with GUS leaning on the end of it */}
+        <div className="hero-lockup">
+          <h1 className="hero-wordmark" ref={wordmarkRef} aria-label={site.teamName}>
+            <span aria-hidden="true">Georgia&nbsp;Southern</span>
+            <small aria-hidden="true">Men&rsquo;s&nbsp;Lacrosse</small>
+          </h1>
+          <Image
+            ref={mascotRef}
+            className="hero-mascot"
+            src="/brand/mascot-gus.png"
+            alt=""
+            width={317}
+            height={468}
+            priority
+          />
+        </div>
+
         <div
           className="mt-5 flex flex-wrap gap-x-3 gap-y-1"
           style={{
