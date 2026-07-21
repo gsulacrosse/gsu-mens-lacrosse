@@ -1,0 +1,13 @@
+{
+  "_readme": "Headlines for the scrolling news ticker on the homepage. Keep each item short — it's a crawl, not an article. Optional `href` makes an item clickable (internal path or full URL). Add newest at the top.",
+  "items": [
+    { "text": "Interest Meeting — Mon Aug 24, 4 PM, RAC Seminar Room (2nd Floor)", "href": "/join" },
+    { "text": "We're hiring — Head Coach, Assistant Coach & Media Team", "href": "/join" },
+    { "text": "Ranked #16 nationally — MCLA DII, 2026" },
+    { "text": "Five straight SELC playoff appearances", "href": "/schedule" },
+    { "text": "Now accepting sponsors — packages from $100", "href": "/donate" },
+    { "text": "2026–27 officers announced", "href": "/roster" },
+    { "text": "Brady Gillis — 1st Team All-Conference, 2026" },
+    { "text": "Gameday: Feb 7 vs Charleston & Wake Forest", "href": "/schedule" }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "_readme": "Non-game upcoming events (meetings, socials, fundraisers). Shown next to Next Fixture on the homepage and on the Join page. Remove events once they pass. Date is YYYY-MM-DD.",
+  "items": [
+    {
+      "title": "Interest Meeting",
+      "date": "2026-08-24",
+      "time": "4:00 PM",
+      "location": "GSU RAC Seminar Room (2nd Floor)",
+      "detail": "All current & prospective players. Covering key info and expectations for the season — fill out the interest form first."
+    }
+  ]
+}

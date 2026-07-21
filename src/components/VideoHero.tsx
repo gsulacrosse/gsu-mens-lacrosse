@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef } from "react";
 import site from "@/data/site.json";
+import Wordmark from "@/components/Wordmark";
 
 /**
  * Homepage hero with the highlight reel playing muted and looping behind the
@@ -15,23 +15,6 @@ import site from "@/data/site.json";
  */
 export default function VideoHero() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const wordmarkRef = useRef<HTMLHeadingElement>(null);
-  const mascotRef = useRef<HTMLImageElement>(null);
-
-  // Match GUS's height to the stacked wordmark so he's exactly as tall as the
-  // two text lines, at every screen size.
-  useEffect(() => {
-    const fit = () => {
-      const w = wordmarkRef.current;
-      const m = mascotRef.current;
-      if (w && m) m.style.height = `${w.getBoundingClientRect().height}px`;
-    };
-    fit();
-    window.addEventListener("resize", fit);
-    // Re-fit once fonts are ready (wordmark height depends on the loaded font)
-    if (document.fonts?.ready) document.fonts.ready.then(fit);
-    return () => window.removeEventListener("resize", fit);
-  }, []);
 
   useEffect(() => {
     const v = videoRef.current;
@@ -48,8 +31,7 @@ export default function VideoHero() {
 
   return (
     <section
-      className="relative w-full overflow-hidden"
-      style={{ height: "clamp(24rem, 74vh, 44rem)" }}
+      className="hero-fullscreen relative w-full overflow-hidden"
       aria-label={`${site.teamName} highlights`}
     >
       <video
@@ -84,25 +66,7 @@ export default function VideoHero() {
         />
 
         {/* Slanted athletic wordmark with GUS leaning on the end of it */}
-        <div className="hero-lockup">
-          <h1
-            className="hero-wordmark hero-word-anim"
-            ref={wordmarkRef}
-            aria-label={site.teamName}
-          >
-            <span aria-hidden="true">Georgia&nbsp;Southern</span>
-            <small aria-hidden="true">Men&rsquo;s&nbsp;Lacrosse</small>
-          </h1>
-          <Image
-            ref={mascotRef}
-            className="hero-mascot hero-mascot-anim"
-            src="/brand/mascot-gus.png"
-            alt=""
-            width={317}
-            height={468}
-            priority
-          />
-        </div>
+        <Wordmark fontSize="clamp(1.55rem, 7.4vw, 4.6rem)" animate heading />
 
         <div
           className="hero-meta-anim mt-5 flex flex-wrap gap-x-3 gap-y-1"

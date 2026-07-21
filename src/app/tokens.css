@@ -43,8 +43,8 @@
   --step-hero: clamp(3rem, 12.5vw, 7rem);
   --step-title: clamp(1.75rem, 6vw, 3rem);
   --step-tile: clamp(1.5rem, 5.5vw, 2.25rem);
-  --step-body: 1.03rem;
-  --step-small: 0.9rem; /* lifted for readability — schedule, labels, meta */
+  --step-body: 1.08rem;
+  --step-small: 0.95rem; /* lifted for readability — schedule, labels, meta */
 
   /* --- Spacing ---------------------------------------------------------- */
   --gap-panel: 0.75rem; /* the gap that lets the photo show through */
@@ -61,6 +61,16 @@
   --z-bg: -1;
   --z-content: 10;
   --z-header: 30;
+
+  /* Sticky header height — the home hero slides up under it by this much so
+     the full-screen intro edit reaches the very top. Matches crest + padding. */
+  --header-h: 72px;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --header-h: 82px;
+  }
 }
 
 /* Map tokens into Tailwind v4's theme so utilities can reach them. */

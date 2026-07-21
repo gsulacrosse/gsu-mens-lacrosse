@@ -25,6 +25,12 @@ export const NAV = [
     photo: "/brand/photos/celebration-night.jpg",
   },
   {
+    href: "/join",
+    label: "Join",
+    blurb: "Play or help out",
+    photo: "/brand/photos/team-huddle.jpg",
+  },
+  {
     href: "/store",
     label: "Store",
     blurb: "Team merch",
@@ -32,8 +38,8 @@ export const NAV = [
   },
   {
     href: "/donate",
-    label: "Donate",
-    blurb: "Support the season",
+    label: "Support",
+    blurb: "Donate & sponsor",
     photo: "/brand/photos/action-southern-1.jpg",
   },
 ] as const;

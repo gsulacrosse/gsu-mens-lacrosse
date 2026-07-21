@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import roster from "@/data/roster.json";
 import board from "@/data/board.json";
 import { PageShell, EmptyState, Block } from "@/components/PageShell";
@@ -48,18 +49,29 @@ export default function RosterPage() {
       )}
 
       {officers.length > 0 && (
-        <Block label="Board">
+        <Block label="2026–27 Board">
+          <Image
+            src="/brand/photos/officers-2026.png"
+            alt="Georgia Southern Men's Lacrosse 2026–27 officers"
+            width={812}
+            height={807}
+            className="mb-6 h-auto w-full max-w-[440px]"
+            style={{ border: "1px solid var(--rule-faint)" }}
+          />
           <ul>
             {officers.map((o) => (
               <li
                 key={o.role + o.name}
-                className="flex flex-wrap items-baseline justify-between gap-x-4 py-3"
+                className="flex flex-wrap items-baseline justify-between gap-x-4 py-3.5"
                 style={{ borderBottom: "1px solid var(--rule-faint)" }}
               >
-                <span className="display" style={{ fontSize: "var(--step-body)" }}>
+                <span className="display" style={{ fontSize: "1.25rem" }}>
                   {o.name}
                 </span>
-                <span style={{ color: "var(--text-muted)", fontSize: "var(--step-small)" }}>
+                <span
+                  className="display"
+                  style={{ color: "var(--gs-gold)", fontSize: "0.9rem", letterSpacing: "0.1em" }}
+                >
                   {o.role}
                 </span>
               </li>

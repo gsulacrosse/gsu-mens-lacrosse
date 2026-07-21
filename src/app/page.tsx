@@ -1,12 +1,16 @@
 import Link from "next/link";
-import site from "@/data/site.json";
 import schedule from "@/data/schedule.json";
+import events from "@/data/events.json";
 import { NAV } from "@/lib/nav";
 import { ArrowIcon } from "@/components/icons";
 import VideoHero from "@/components/VideoHero";
 import FeaturedReel from "@/components/FeaturedReel";
 import OpponentLogo from "@/components/OpponentLogo";
 import Honors from "@/components/Honors";
+import NewsTicker from "@/components/NewsTicker";
+import Countdown from "@/components/Countdown";
+import InstagramFeed from "@/components/InstagramFeed";
+import IntroSequence from "@/components/IntroSequence";
 
 type Game = {
   date: string;
@@ -26,6 +30,21 @@ const fmt = (iso: string) =>
     day: "numeric",
   });
 
+const fmtFull = (iso: string) =>
+  new Date(`${iso}T12:00:00`).toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+  });
+
+type EventItem = {
+  title: string;
+  date: string;
+  time?: string;
+  location?: string;
+  detail?: string;
+};
+
 export default function Home() {
   const games = schedule as Game[];
   // Next fixture = the soonest DATED game without a result. Undated (TBD)
@@ -37,18 +56,27 @@ export default function Home() {
 
   return (
     <>
+      {/* Full-screen reel intro → header + hero drop in. Plays every load. */}
+      <IntroSequence />
+
       {/* Full-bleed muted highlight reel behind the team name */}
       <VideoHero />
 
+      {/* Broadcast-style news crawl */}
+      <NewsTicker />
+
       <div className="shell">
+        {/* ================= INSTAGRAM (live, right below the news) ======= */}
+        <InstagramFeed />
+
         {/* ================= THE BOARD ================= */}
         <section
-          className="grid grid-cols-1 lg:grid-cols-[1.35fr_0.65fr]"
+          className="grid grid-cols-1 lg:grid-cols-[1.25fr_1fr_0.8fr]"
           style={{ borderBottom: "1px solid var(--rule-faint)" }}
         >
           {/* Next fixture */}
           <div
-            className="rise py-8 sm:py-12 lg:py-14 lg:pr-10"
+            className="rise board-col py-8 sm:py-12 lg:py-14 lg:pr-9"
             style={{ borderRight: "1px solid var(--rule-faint)" }}
           >
             <p className="kicker">Next fixture</p>
@@ -66,24 +94,27 @@ export default function Home() {
                   </span>
                   <span
                     className="display"
-                    style={{ fontSize: "0.78rem", letterSpacing: "0.14em", color: "var(--gs-gold)" }}
+                    style={{ fontSize: "0.9rem", letterSpacing: "0.14em", color: "var(--gs-gold)" }}
                   >
                     {next.home ? "Home" : "Away"}
                   </span>
                   {next.location && (
                     <span
                       className="display"
-                      style={{ fontSize: "0.78rem", letterSpacing: "0.13em", color: "var(--text-muted)" }}
+                      style={{ fontSize: "0.9rem", letterSpacing: "0.1em", color: "var(--text-muted)" }}
                     >
                       {next.location}
                     </span>
                   )}
                 </div>
                 {next.note && (
-                  <p className="mt-2" style={{ color: "var(--text-muted)", fontSize: "0.82rem" }}>
+                  <p className="mt-2" style={{ color: "var(--text-muted)", fontSize: "0.95rem" }}>
                     {next.note}
                   </p>
                 )}
+                <div className="mt-4">
+                  <Countdown date={next.date} opponent={next.opponent} />
+                </div>
               </>
             ) : (
               <>
@@ -98,13 +129,50 @@ export default function Home() {
             )}
           </div>
 
+          {/* Upcoming events (non-game) — next to the fixture */}
+          <div
+            className="rise board-col py-6 lg:py-14 lg:px-9"
+            style={{ borderRight: "1px solid var(--rule-faint)" }}
+          >
+            <h2 className="kicker pb-2.5" style={{ borderBottom: "1px solid var(--rule-gold)" }}>
+              Upcoming
+            </h2>
+            {(events.items as EventItem[]).length === 0 ? (
+              <p className="pt-3" style={{ color: "var(--text-muted)", fontSize: "0.95rem" }}>
+                Nothing scheduled right now.
+              </p>
+            ) : (
+              <ul className="mt-3 flex flex-col gap-5">
+                {(events.items as EventItem[]).map((e) => (
+                  <li key={e.title + e.date}>
+                    <p className="display" style={{ fontSize: "var(--step-tile)" }}>
+                      {e.title}
+                    </p>
+                    <p className="numeral mt-1" style={{ fontSize: "1.05rem", color: "var(--gs-gold)" }}>
+                      {fmtFull(e.date)}
+                      {e.time ? ` · ${e.time}` : ""}
+                    </p>
+                    {e.location && (
+                      <p style={{ color: "var(--text-primary)", fontSize: "0.95rem" }}>{e.location}</p>
+                    )}
+                    {e.detail && (
+                      <p className="mt-1" style={{ color: "var(--text-muted)", fontSize: "0.9rem" }}>
+                        {e.detail}
+                      </p>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
           {/* Past scores — update after each game (see README) */}
-          <aside className="rise py-6 lg:py-12 lg:pl-10">
+          <aside className="rise board-col py-6 lg:py-14 lg:pl-9">
             <h2 className="kicker pb-2.5" style={{ borderBottom: "1px solid var(--rule-gold)" }}>
               Past scores
             </h2>
             {played.length === 0 ? (
-              <p className="pt-3" style={{ color: "var(--text-muted)", fontSize: "0.9rem" }}>
+              <p className="pt-3" style={{ color: "var(--text-muted)", fontSize: "0.95rem" }}>
                 No results posted yet. Scores show up here after each game.
               </p>
             ) : (
@@ -117,15 +185,15 @@ export default function Home() {
                   >
                     <span
                       className="numeral"
-                      style={{ minWidth: "3.4rem", color: "var(--text-muted)", fontSize: "0.85rem" }}
+                      style={{ minWidth: "3.4rem", color: "var(--text-muted)", fontSize: "0.9rem" }}
                     >
                       {fmt(g.date)}
                     </span>
                     <OpponentLogo src={g.logo} name={g.opponent} size={28} />
-                    <span className="display flex-1" style={{ fontSize: "0.98rem" }}>
+                    <span className="display flex-1" style={{ fontSize: "1.05rem" }}>
                       {g.opponent}
                     </span>
-                    <span className="numeral" style={{ fontSize: "0.92rem" }}>
+                    <span className="numeral" style={{ fontSize: "1rem" }}>
                       {g.result}
                     </span>
                   </li>
@@ -138,7 +206,7 @@ export default function Home() {
         {/* ================= DESTINATION STRIP (scattered photos) ========= */}
         <nav
           aria-label="Sections"
-          className="grid grid-cols-2 lg:grid-cols-5"
+          className="grid grid-cols-2 lg:grid-cols-3"
           style={{ borderBottom: "1px solid var(--rule-faint)" }}
         >
           {NAV.map((item, i) => (
@@ -172,11 +240,11 @@ export default function Home() {
               <span className="relative">
                 <span
                   className="display block transition-colors duration-200 group-hover:text-[var(--gs-gold)]"
-                  style={{ fontSize: "clamp(1.15rem, 3vw, 1.7rem)" }}
+                  style={{ fontSize: "clamp(1.5rem, 3.4vw, 2.1rem)" }}
                 >
                   {item.label}
                 </span>
-                <span style={{ color: "#cdd6e4", fontSize: "0.76rem" }}>{item.blurb}</span>
+                <span style={{ color: "#dbe2ee", fontSize: "0.95rem" }}>{item.blurb}</span>
               </span>
             </Link>
           ))}
@@ -211,12 +279,11 @@ export default function Home() {
         {/* ================= JOIN ================= */}
         <section className="rise flex flex-wrap items-center gap-5 py-8 sm:py-11">
           <p style={{ color: "var(--text-muted)", flex: 1, minWidth: "16rem", maxWidth: "46ch" }}>
-            Open to all Georgia Southern students. Experience helps, but we take beginners.
+            Open to all Georgia Southern students. Experience helps, but we take beginners — dues,
+            practice times, and how to join are on the Join page.
           </p>
-          <a
-            href={site.links.interestForm}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/join"
             className="display inline-flex cursor-pointer items-center gap-2.5 px-7 transition-colors duration-200 hover:bg-[var(--gs-gold)]"
             style={{
               minHeight: 48,
@@ -225,9 +292,9 @@ export default function Home() {
               letterSpacing: "0.14em",
             }}
           >
-            Interest form
+            Join the team
             <ArrowIcon />
-          </a>
+          </Link>
         </section>
       </div>
     </>

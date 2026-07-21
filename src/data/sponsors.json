@@ -1,1 +1,63 @@
-[]
+{
+  "_readme": "Sponsors and sponsorship packages shown on the Support page. Add a sponsor by dropping a logo in public/brand/sponsors/ and adding an entry to `sponsors`. Packages come straight from the team's sponsorship graphic.",
+
+  "sponsors": [
+    {
+      "name": "DJ REDDOT Entertainment",
+      "tier": "",
+      "url": "https://instagram.com/dj_reddot_entertainment",
+      "image": "/brand/photos/sponsor-dj-reddot.png",
+      "note": "Weddings · Private & corporate events · 678-313-6221"
+    }
+  ],
+
+  "bannerDeadline": "Businesses interested in the home-game banner must inquire by January 15, 2027.",
+
+  "packages": [
+    {
+      "name": "Donator",
+      "price": "$100",
+      "perks": ["Business shoutout on Instagram story"]
+    },
+    {
+      "name": "Bronze",
+      "price": "$250",
+      "perks": [
+        "Instagram story shoutout",
+        "Featured in one social media post across all platforms"
+      ]
+    },
+    {
+      "name": "Silver",
+      "price": "$500",
+      "perks": [
+        "Instagram story shoutout",
+        "Featured in one social media post across all platforms",
+        "Logo on the official sponsorship banner at all home games"
+      ]
+    },
+    {
+      "name": "Gold",
+      "price": "$750",
+      "perks": [
+        "Instagram story shoutout",
+        "Featured in one social media post across all platforms",
+        "Logo on the official sponsorship banner at all home games",
+        "Personalized shoutout reel featuring two or more players"
+      ]
+    },
+    {
+      "name": "Top Sponsor",
+      "price": "$1,500+",
+      "featured": true,
+      "perks": [
+        "Instagram story shoutout",
+        "Featured in one social media post across all platforms",
+        "Additional personalized reel featuring two or more players",
+        "Logo on the official sponsorship banner at all home games",
+        "Logo decal on players' helmets",
+        "Logo + tagged account on every gameday graphic"
+      ]
+    }
+  ]
+}

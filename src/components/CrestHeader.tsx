@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import site from "@/data/site.json";
 import { NAV } from "@/lib/nav";
+import Wordmark from "@/components/Wordmark";
 
 /**
  * Fixture-board header: crest and wordmark locked left, sections right,
@@ -16,7 +17,7 @@ export default function CrestHeader() {
 
   return (
     <header
-      className="sticky top-0 w-full"
+      className="crest-header sticky top-0 w-full"
       style={{
         zIndex: "var(--z-header)",
         background: "rgba(5, 18, 42, 0.86)",
@@ -37,26 +38,11 @@ export default function CrestHeader() {
             width={128}
             height={128}
             priority
-            className="h-[52px] w-[52px] sm:h-[64px] sm:w-[64px]"
+            className="h-[48px] w-[48px] sm:h-[58px] sm:w-[58px]"
           />
+          {/* Same slanted wordmark + GUS as the hero, just small */}
           <span className="hidden sm:block">
-            <span
-              className="display block"
-              style={{ fontSize: "clamp(0.95rem, 2.6vw, 1.45rem)" }}
-            >
-              {site.teamName}
-            </span>
-            <span
-              className="display block"
-              style={{
-                fontSize: "0.62rem",
-                letterSpacing: "0.2em",
-                color: "var(--gs-gold)",
-                marginTop: 2,
-              }}
-            >
-              Est. {site.established} · MCLA DII · {site.conference}
-            </span>
+            <Wordmark fontSize="clamp(1rem, 2.4vw, 1.4rem)" />
           </span>
         </Link>
 
@@ -78,16 +64,14 @@ export default function CrestHeader() {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className="display flex flex-none cursor-pointer items-center justify-center whitespace-nowrap px-2 transition-colors duration-200 sm:px-3"
+                className="nav-link flex flex-none cursor-pointer items-center justify-center whitespace-nowrap px-2.5 transition-colors duration-200 sm:px-3.5"
                 style={{
                   minHeight: 44,
-                  fontSize: "0.7rem",
-                  letterSpacing: "0.11em",
                   color: active ? "var(--gs-gold)" : "var(--text-primary)",
                   borderBottom: `2px solid ${active ? "var(--gs-gold)" : "transparent"}`,
                 }}
               >
-                {item.label}
+                <span className="nav-link-text">{item.label}</span>
               </Link>
             );
           })}

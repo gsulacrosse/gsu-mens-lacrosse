@@ -17,8 +17,10 @@
     "linktree": "https://linktr.ee/gsueagleslax",
     "tiktok": "",
     "interestForm": "https://forms.gle/FsKP9TX7QauMPuP49",
-    "gofundme": "https://gofund.me/015e4b31"
+    "gofundme": "https://gofund.me/015e4b31",
+    "beholdFeedId": "VsbM5wJ9UCHIREe9lNNG"
   },
+  "_beholdNote": "beholdFeedId powers the Instagram grid on the homepage. It pulls from behold.so (connected to @gsueagleslax). To change accounts, make a new feed at behold.so and paste its ID here.",
 
   "_tiktokNote": "Leave tiktok as \"\" until the exact handle is confirmed. An empty string hides the link rather than shipping a broken one.",
 
