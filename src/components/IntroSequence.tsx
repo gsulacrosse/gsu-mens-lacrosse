@@ -97,12 +97,49 @@ export default function IntroSequence() {
       );
     };
 
-    timers.push(window.setTimeout(revealEdit, 1100)); // minimum loader time
-    timers.push(window.setTimeout(revealEdit, 3000)); // hard cap
+    // Hold the loader until BOTH a minimum beat has passed (so it never flashes)
+    // AND the page is actually ready — the reel can play + the window has
+    // loaded — so on slow connections the loader stays up instead of lifting
+    // onto a half-loaded page. A hard cap guarantees it can never get stuck.
+    let minElapsed = false;
+    let pageReady = document.readyState === "complete";
+    const tryReveal = () => {
+      if (minElapsed && pageReady) revealEdit();
+    };
+
+    const heroVideo = document.querySelector("video");
+    const onVideoReady = () => {
+      pageReady = true;
+      tryReveal();
+    };
+    if (heroVideo) {
+      if (heroVideo.readyState >= 3 /* HAVE_FUTURE_DATA — can play through */) {
+        pageReady = true;
+      } else {
+        heroVideo.addEventListener("canplay", onVideoReady, { once: true });
+        heroVideo.addEventListener("loadeddata", onVideoReady, { once: true });
+      }
+    }
+    const onWindowLoad = () => {
+      pageReady = true;
+      tryReveal();
+    };
+    if (!pageReady) window.addEventListener("load", onWindowLoad, { once: true });
+
+    timers.push(
+      window.setTimeout(() => {
+        minElapsed = true;
+        tryReveal();
+      }, 1100), // minimum loader time
+    );
+    timers.push(window.setTimeout(revealEdit, 6000)); // hard cap — never stuck
 
     return () => {
       teardownIntent();
       timers.forEach((t) => window.clearTimeout(t));
+      heroVideo?.removeEventListener("canplay", onVideoReady);
+      heroVideo?.removeEventListener("loadeddata", onVideoReady);
+      window.removeEventListener("load", onWindowLoad);
       root.classList.remove("intro-lock", "intro-armed", "intro-fired");
     };
   }, []);

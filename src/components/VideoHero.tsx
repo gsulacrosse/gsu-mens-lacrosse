@@ -41,7 +41,7 @@ export default function VideoHero() {
         loop
         playsInline
         muted
-        preload="metadata"
+        preload="auto"
         aria-hidden="true"
         tabIndex={-1}
       >
