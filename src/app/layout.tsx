@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Barlow, Barlow_Condensed } from "next/font/google";
 import type { CSSProperties } from "react";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import site from "@/data/site.json";
 import { SITE_URL } from "@/lib/site-url";
 import CrestHeader from "@/components/CrestHeader";
@@ -132,6 +133,7 @@ export default function RootLayout({
         <SiteFooter />
         <ScrollProgress />
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
