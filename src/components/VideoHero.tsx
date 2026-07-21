@@ -79,19 +79,23 @@ export default function VideoHero() {
         {/* Gold accent bar — a small mark that anchors the title */}
         <span
           aria-hidden="true"
-          className="mb-4 block"
+          className="hero-bar-anim mb-4 block"
           style={{ width: 68, height: 5, background: "var(--gs-gold)" }}
         />
 
         {/* Slanted athletic wordmark with GUS leaning on the end of it */}
         <div className="hero-lockup">
-          <h1 className="hero-wordmark" ref={wordmarkRef} aria-label={site.teamName}>
+          <h1
+            className="hero-wordmark hero-word-anim"
+            ref={wordmarkRef}
+            aria-label={site.teamName}
+          >
             <span aria-hidden="true">Georgia&nbsp;Southern</span>
             <small aria-hidden="true">Men&rsquo;s&nbsp;Lacrosse</small>
           </h1>
           <Image
             ref={mascotRef}
-            className="hero-mascot"
+            className="hero-mascot hero-mascot-anim"
             src="/brand/mascot-gus.png"
             alt=""
             width={317}
@@ -101,7 +105,7 @@ export default function VideoHero() {
         </div>
 
         <div
-          className="mt-5 flex flex-wrap gap-x-3 gap-y-1"
+          className="hero-meta-anim mt-5 flex flex-wrap gap-x-3 gap-y-1"
           style={{
             fontSize: "0.8rem",
             letterSpacing: "0.16em",

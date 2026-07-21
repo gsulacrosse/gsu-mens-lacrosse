@@ -1,3 +1,4 @@
+import Image from "next/image";
 import site from "@/data/site.json";
 import { InstagramIcon, FacebookIcon, TikTokIcon, MailIcon } from "./icons";
 
@@ -20,9 +21,13 @@ export default function SiteFooter() {
       >
         <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <p className="display" style={{ fontSize: "var(--step-body)" }}>
-              {site.teamName}
-            </p>
+            <Image
+              src="/brand/wordmark-eagle.png"
+              alt={site.teamName}
+              width={220}
+              height={130}
+              className="mb-3 h-auto w-[150px]"
+            />
             <p style={{ color: "var(--text-muted)", fontSize: "var(--step-small)" }}>
               Est. {site.established} · {site.league} · {site.conference}
             </p>
