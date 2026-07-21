@@ -1,10 +1,37 @@
-[
-  { "role": "President", "name": "Brendan Lightsey" },
-  { "role": "Vice President", "name": "Brady Gillis" },
-  { "role": "Secretary", "name": "Gavin Holwill" },
-  { "role": "Treasurer", "name": "Finn Greer" },
-  { "role": "Treasurer", "name": "Connor Barlan" },
-  { "role": "Social Chair", "name": "Boston Seimer" },
-  { "role": "Apparel Chair", "name": "Aidan Shepherd" },
-  { "role": "Campus Engagement", "name": "Tyler Salin" }
-]
+{
+  "2026-27": [
+    {
+      "role": "President",
+      "name": "Brendan Lightsey"
+    },
+    {
+      "role": "Vice President",
+      "name": "Brady Gillis"
+    },
+    {
+      "role": "Secretary",
+      "name": "Gavin Holwill"
+    },
+    {
+      "role": "Treasurer",
+      "name": "Finn Greer"
+    },
+    {
+      "role": "Treasurer",
+      "name": "Connor Barlan"
+    },
+    {
+      "role": "Social Chair",
+      "name": "Boston Siemer"
+    },
+    {
+      "role": "Apparel Chair",
+      "name": "Aidan Shepherd"
+    },
+    {
+      "role": "Campus Engagement",
+      "name": "Tyler Salin"
+    }
+  ],
+  "2025-26": []
+}
