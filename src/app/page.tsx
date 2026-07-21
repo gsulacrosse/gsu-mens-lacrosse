@@ -1,5 +1,6 @@
 import Link from "next/link";
 import schedule from "@/data/schedule.json";
+import site from "@/data/site.json";
 import events from "@/data/events.json";
 import { NAV } from "@/lib/nav";
 import { ArrowIcon } from "@/components/icons";
@@ -22,6 +23,7 @@ type Game = {
   logo?: string;
   season?: string;
   result?: string;
+  hidden?: boolean;
 };
 
 const fmt = (iso: string) =>
@@ -46,12 +48,15 @@ type EventItem = {
 };
 
 export default function Home() {
-  const games = schedule as Game[];
-  // Next fixture = the soonest DATED game without a result. Undated (TBD)
-  // games are real but can't be "next", so they're excluded from this pick.
-  const next = games
-    .filter((g) => !g.result && g.date)
-    .sort((a, b) => a.date.localeCompare(b.date))[0];
+  const games = (schedule as Game[]).filter((g) => !g.hidden);
+  // Next fixture = the soonest DATED game without a result. While dates are
+  // hidden (unconfirmed — see site.json), nothing is picked so the board shows
+  // "To be announced" rather than implying a confirmed date.
+  const next = site.showScheduleDates
+    ? games
+        .filter((g) => !g.result && g.date)
+        .sort((a, b) => a.date.localeCompare(b.date))[0]
+    : undefined;
   const played = games.filter((g) => g.result).slice(-6).reverse();
 
   return (

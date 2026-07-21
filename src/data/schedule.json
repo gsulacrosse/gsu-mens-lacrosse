@@ -6,7 +6,7 @@
 
   { "date": "2027-01-27", "opponent": "The Citadel", "home": true, "logo": "/brand/logos/citadel.png", "season": "Spring 2027" },
   { "date": "2027-02-06", "opponent": "Charleston", "home": true, "logo": "/brand/logos/charleston.png", "season": "Spring 2027" },
-  { "date": "2027-02-06", "opponent": "Wake Forest", "home": true, "note": "Pending confirmation", "logo": "/brand/logos/wake-forest.png", "season": "Spring 2027" },
+  { "date": "2027-02-06", "opponent": "Wake Forest", "home": true, "note": "Pending confirmation", "logo": "/brand/logos/wake-forest.png", "season": "Spring 2027", "hidden": true },
   { "date": "2027-02-19", "opponent": "UNC Wilmington", "home": false, "location": "Wilmington, NC", "logo": "/brand/logos/unc-wilmington.png", "season": "Spring 2027" },
   { "date": "2027-02-20", "opponent": "UNC Charlotte", "home": false, "location": "Wilmington, NC", "logo": "/brand/logos/unc-charlotte.png", "season": "Spring 2027" },
   { "date": "2027-03-05", "opponent": "Tulane", "home": false, "logo": "/brand/logos/tulane.png", "season": "Spring 2027" },

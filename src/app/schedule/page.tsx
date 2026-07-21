@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import schedule from "@/data/schedule.json";
+import site from "@/data/site.json";
 import { PageShell, EmptyState, Block } from "@/components/PageShell";
 import OpponentLogo from "@/components/OpponentLogo";
 
@@ -15,6 +16,7 @@ type Game = {
   logo?: string;
   season?: string;
   result?: string;
+  hidden?: boolean;
 };
 
 const fmt = (iso: string) =>
@@ -24,10 +26,12 @@ const fmt = (iso: string) =>
     day: "numeric",
   });
 
-const dateText = (g: Game) => g.dateLabel || (g.date ? fmt(g.date) : "TBD");
+// Dates stay hidden ("TBD") until every one is confirmed — see site.json.
+const dateText = (g: Game) =>
+  site.showScheduleDates ? g.dateLabel || (g.date ? fmt(g.date) : "TBD") : "TBD";
 
 export default function SchedulePage() {
-  const games = schedule as Game[];
+  const games = (schedule as Game[]).filter((g) => !g.hidden);
 
   // Group into the seasons the team uses, preserving list order within each.
   const seasons: string[] = [];
@@ -39,7 +43,11 @@ export default function SchedulePage() {
   return (
     <PageShell
       title="Schedule"
-      intro="2026–27 season. Some dates are still being confirmed — check Instagram for the latest."
+      intro={
+        site.showScheduleDates
+          ? "2026–27 season. Some dates are still being confirmed — check Instagram for the latest."
+          : "2026–27 opponents. Dates are being finalized and will be posted here once confirmed — follow Instagram for announcements."
+      }
     >
       {games.length === 0 ? (
         <EmptyState>

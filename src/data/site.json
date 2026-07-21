@@ -11,6 +11,9 @@
 
   "email": "gsulacrosse@gmail.com",
 
+  "showScheduleDates": false,
+  "_showScheduleDatesNote": "false = hide all game DATES site-wide (schedule shows 'TBD', the homepage 'Next fixture' shows 'To be announced') so nothing misleads before the schedule is confirmed. Flip to true once every date is approved and all dates appear at once. Real dates stay in schedule.json either way. A game with \"hidden\": true (e.g. Wake Forest, pending) is left off entirely until that flag is removed.",
+
   "links": {
     "instagram": "https://instagram.com/gsueagleslax",
     "facebook": "https://facebook.com/GSUeaglesLax",
