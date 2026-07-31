@@ -18,6 +18,8 @@ type Game = {
   dateLabel?: string;
   opponent: string;
   home: boolean;
+  /** Played at a third site — neither team's home field (e.g. SELC Tournament). */
+  neutral?: boolean;
   location?: string;
   note?: string;
   logo?: string;
@@ -88,20 +90,20 @@ export default function Home() {
             {next ? (
               <>
                 <div className="mt-2.5 flex items-center gap-4">
-                  <OpponentLogo src={next.logo} name={next.opponent} size={64} />
+                  <OpponentLogo src={next.logo} name={next.opponent} size={96} />
                   <h2 className="display" style={{ fontSize: "var(--step-title)" }}>
                     {next.opponent}
                   </h2>
                 </div>
                 <div className="mt-3 flex flex-wrap items-baseline gap-x-6 gap-y-2">
                   <span className="numeral" style={{ fontSize: "var(--step-tile)" }}>
-                    {fmt(next.date)}
+                    {next.dateLabel || fmt(next.date)}
                   </span>
                   <span
                     className="display"
                     style={{ fontSize: "0.9rem", letterSpacing: "0.14em", color: "var(--gs-gold)" }}
                   >
-                    {next.home ? "Home" : "Away"}
+                    {next.neutral ? "Neutral" : next.home ? "Home" : "Away"}
                   </span>
                   {next.location && (
                     <span
@@ -194,7 +196,7 @@ export default function Home() {
                     >
                       {fmt(g.date)}
                     </span>
-                    <OpponentLogo src={g.logo} name={g.opponent} size={28} />
+                    <OpponentLogo src={g.logo} name={g.opponent} size={40} />
                     <span className="display flex-1" style={{ fontSize: "1.05rem" }}>
                       {g.opponent}
                     </span>
@@ -268,7 +270,7 @@ export default function Home() {
         >
           <p className="kicker">Affiliations</p>
           <div className="flex items-center gap-3">
-            <OpponentLogo src="/brand/logos/selc.png" name="SELC" size={44} />
+            <OpponentLogo src="/brand/logos/selc.png" name="SELC" size={60} />
             <span className="display" style={{ fontSize: "0.9rem", letterSpacing: "0.08em" }}>
               SELC North
             </span>

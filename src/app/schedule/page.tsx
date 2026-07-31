@@ -14,6 +14,8 @@ type Game = {
   dateLabel?: string;
   opponent: string;
   home: boolean;
+  /** Played at a third site — neither team's home field (e.g. SELC Tournament). */
+  neutral?: boolean;
   location?: string;
   note?: string;
   logo?: string;
@@ -37,6 +39,8 @@ const dateText = (g: Game) => {
   return g.dateLabel || (g.date ? fmt(g.date) : "TBD");
 };
 
+const venueText = (g: Game) => (g.neutral ? "Neutral" : g.home ? "Home" : "Away");
+
 function GameRow({ game, i }: { game: Game; i: number }) {
   return (
     <li
@@ -54,9 +58,9 @@ function GameRow({ game, i }: { game: Game; i: number }) {
         className="display"
         style={{ fontSize: "0.72rem", letterSpacing: "0.13em", color: "var(--gs-gold)", minWidth: "3rem" }}
       >
-        {game.home ? "Home" : "Away"}
+        {venueText(game)}
       </span>
-      <OpponentLogo src={game.logo} name={game.opponent} size={40} />
+      <OpponentLogo src={game.logo} name={game.opponent} size={60} />
       <span className="display flex-1" style={{ fontSize: "var(--step-tile)", minWidth: "8rem" }}>
         {game.opponent}
       </span>

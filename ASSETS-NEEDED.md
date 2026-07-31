@@ -58,12 +58,14 @@ Nothing else needs to change.
 
 ## 4. Schedule
 
-Currently empty, so the site honestly says "To be announced."
+The 2026–27 slate is confirmed, dates are live (`showScheduleDates: true`), and
+every game has a location and an opponent logo. One gap remains:
 
-**Ask for:** dates, opponents, home/away, locations. A spreadsheet or even a
-text message works — it's five fields per game.
+- **SCAD (fall)** — still undated, shows as "TBD."
 
-**Install:** `src/data/schedule.json` (format in README).
+**Ask for:** the SCAD date.
+
+**Install:** `src/data/schedule.json`.
 
 ---
 
