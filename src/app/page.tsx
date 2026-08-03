@@ -51,12 +51,15 @@ type EventItem = {
 
 export default function Home() {
   const games = (schedule as Game[]).filter((g) => !g.hidden);
-  // Next fixture = the soonest DATED game without a result. While dates are
-  // hidden (unconfirmed — see site.json), nothing is picked so the board shows
-  // "To be announced" rather than implying a confirmed date.
+  // Next fixture = the soonest UPCOMING dated game without a result. The date
+  // gate (>= today) matters: a PAST game with no score recorded (e.g. an old
+  // scrimmage) must never surface as "next" just because its result is blank.
+  // While dates are hidden (unconfirmed — see site.json), nothing is picked so
+  // the board shows "To be announced" rather than implying a confirmed date.
+  const today = new Date().toISOString().slice(0, 10);
   const next = site.showScheduleDates
     ? games
-        .filter((g) => !g.result && g.date)
+        .filter((g) => !g.result && g.date && g.date >= today)
         .sort((a, b) => a.date.localeCompare(b.date))[0]
     : undefined;
   const played = games.filter((g) => g.result).slice(-6).reverse();
